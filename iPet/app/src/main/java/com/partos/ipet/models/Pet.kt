@@ -8,5 +8,7 @@ data class Pet(
     var look: Look,
     var points: Int,
     var age: Long,
-    var isAlive: Boolean
+    var isAlive: Boolean,
+    var foodAmount: Int,
+    var funAmount: Int
 )

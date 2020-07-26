@@ -27,6 +27,8 @@ class BaseFragmentLogic(val rootView: View) {
     private lateinit var hungerProgress: ProgressBar
     private lateinit var funText: TextView
     private lateinit var funProgress: ProgressBar
+    private lateinit var foodText: TextView
+    private lateinit var playText: TextView
 
     fun initFragment() {
         looperThread.start()
@@ -70,10 +72,23 @@ class BaseFragmentLogic(val rootView: View) {
         hungerProgress = rootView.findViewById(R.id.progress_hunger)
         funText = rootView.findViewById(R.id.text_fun)
         funProgress = rootView.findViewById(R.id.progress_fun)
+        foodText = rootView.findViewById(R.id.text_food)
+        playText = rootView.findViewById(R.id.text_play)
     }
 
     private fun initPet() {
-        pet = Pet(100, 100, 100, 100, Look("dog", 1, 1), 0, 0, true)
+        pet = Pet(100,
+            100,
+            100,
+            100,
+            Look("dog",
+                1,
+                1),
+            0,
+            0,
+            true,
+            10,
+            10)
         hungerText.text = rootView.context.getString(R.string.hunger) + " 100/100"
         funText.text = rootView.context.getString(R.string.`fun`) + " 100/100"
         hungerProgress.progress = 100
@@ -97,6 +112,8 @@ class BaseFragmentLogic(val rootView: View) {
         var threadHandler = Handler(looperThread.looper)
         var position = 0
         var isReady = 0
+        foodText.text = pet.foodAmount.toString()
+        playText.text = pet.funAmount.toString()
         threadHandler.post(object : Runnable {
             override fun run() {
                 when (position) {

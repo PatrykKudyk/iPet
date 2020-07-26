@@ -42,18 +42,22 @@ class BaseFragmentLogic(val rootView: View) {
 
     private fun initListeners() {
         foodButton.setOnClickListener {
-            pet.hungerLvl += 5
-            if(pet.hungerLvl > pet.maxHungerLvl) {
-                pet.hungerLvl = pet.maxHungerLvl
+            if (pet.isAlive) {
+                pet.hungerLvl += 5
+                if (pet.hungerLvl > pet.maxHungerLvl) {
+                    pet.hungerLvl = pet.maxHungerLvl
+                }
+                showProgress()
             }
-            showProgress()
         }
         playButton.setOnClickListener {
-            pet.funLvl += 10
-            if (pet.funLvl > pet.maxFunLvl) {
-                pet.funLvl = pet.maxFunLvl
+            if (pet.isAlive) {
+                pet.funLvl += 10
+                if (pet.funLvl > pet.maxFunLvl) {
+                    pet.funLvl = pet.maxFunLvl
+                }
+                showProgress()
             }
-            showProgress()
         }
     }
 
@@ -126,7 +130,10 @@ class BaseFragmentLogic(val rootView: View) {
                 if (!checkIfDead()) {
                     threadHandler.postDelayed(this, 500)
                 } else {
-                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.death))
+                    pet.isAlive = false
+                    (rootView.context as MainActivity).runOnUiThread {
+                        image.setImageDrawable(rootView.context.getDrawable(R.drawable.death))
+                    }
                     threadHandler.looper.quitSafely()
                 }
             }

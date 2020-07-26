@@ -29,6 +29,7 @@ class BaseFragmentLogic(val rootView: View) {
     private lateinit var funProgress: ProgressBar
     private lateinit var foodText: TextView
     private lateinit var playText: TextView
+    private lateinit var moneyText: TextView
 
     fun initFragment() {
         looperThread.start()
@@ -45,7 +46,7 @@ class BaseFragmentLogic(val rootView: View) {
     private fun initListeners() {
         foodButton.setOnClickListener {
             if (pet.isAlive) {
-                pet.hungerLvl += 5
+                pet.hungerLvl += pet.foodAmount
                 if (pet.hungerLvl > pet.maxHungerLvl) {
                     pet.hungerLvl = pet.maxHungerLvl
                 }
@@ -54,11 +55,17 @@ class BaseFragmentLogic(val rootView: View) {
         }
         playButton.setOnClickListener {
             if (pet.isAlive) {
-                pet.funLvl += 10
+                if (pet.maxFunLvl - pet.funLvl >= pet.funAmount) {
+                    pet.points += pet.funAmount
+                } else {
+                    pet.points += pet.maxFunLvl - pet.funLvl
+                }
+                pet.funLvl += pet.funAmount
                 if (pet.funLvl > pet.maxFunLvl) {
                     pet.funLvl = pet.maxFunLvl
                 }
                 showProgress()
+                moneyText.text = formatMoney()
             }
         }
     }
@@ -74,21 +81,26 @@ class BaseFragmentLogic(val rootView: View) {
         funProgress = rootView.findViewById(R.id.progress_fun)
         foodText = rootView.findViewById(R.id.text_food)
         playText = rootView.findViewById(R.id.text_play)
+        moneyText = rootView.findViewById(R.id.text_money)
     }
 
     private fun initPet() {
-        pet = Pet(100,
+        pet = Pet(
             100,
             100,
             100,
-            Look("dog",
+            100,
+            Look(
+                "dog",
                 1,
-                1),
+                1
+            ),
             0,
             0,
             true,
-            10,
-            10)
+            5,
+            10
+        )
         hungerText.text = rootView.context.getString(R.string.hunger) + " 100/100"
         funText.text = rootView.context.getString(R.string.`fun`) + " 100/100"
         hungerProgress.progress = 100
@@ -114,6 +126,7 @@ class BaseFragmentLogic(val rootView: View) {
         var isReady = 0
         foodText.text = pet.foodAmount.toString()
         playText.text = pet.funAmount.toString()
+        moneyText.text = formatMoney()
         threadHandler.post(object : Runnable {
             override fun run() {
                 when (position) {
@@ -129,7 +142,7 @@ class BaseFragmentLogic(val rootView: View) {
                     }
                 }
                 if (isReady == 2) {
-                    pet.hungerLvl -= 11
+                    pet.hungerLvl -= 1
                     pet.funLvl -= 2
                     if (pet.funLvl < 0) {
                         pet.funLvl = 0
@@ -174,6 +187,36 @@ class BaseFragmentLogic(val rootView: View) {
         hungerProgress.progress = pet.hungerLvl
         funProgress.max = pet.maxFunLvl
         funProgress.progress = pet.funLvl
+    }
+
+    private fun formatMoney(): String {
+        var finalString = ""
+        when (pet.points) {
+            in 0..999 -> {
+                finalString = pet.points.toString()
+            }
+            in 1000..999999 -> {
+                val money1 = pet.points / 1000
+                val money2 = pet.points % 1000
+                finalString = money1.toString() + " " + money2.toString()
+            }
+            in 1000000..999999999 -> {
+                val money1 = pet.points / 1000000
+                val money2 = (pet.points % 1000000) / 1000
+                val money3 = (pet.points % 1000)
+                finalString = money1.toString() + " " + money2.toString() + " " + money3.toString()
+            }
+            in 1000000000..999999999999 -> {
+                val money1 = pet.points / 1000000000
+                val money2 = (pet.points % 1000000000) / 1000000
+                val money3 = (pet.points % 1000000) / 1000
+                val money4 = (pet.points % 1000)
+                finalString =
+                    money1.toString() + " " + money2.toString() + " " + money3.toString() +
+                            " " + money4.toString()
+            }
+        }
+        return finalString
     }
 
 }

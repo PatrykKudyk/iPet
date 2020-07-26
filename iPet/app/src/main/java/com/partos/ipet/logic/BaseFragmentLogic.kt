@@ -95,7 +95,7 @@ class BaseFragmentLogic(val rootView: View) {
                 1,
                 1
             ),
-            0,
+            1000,
             0,
             true,
             5,
@@ -190,33 +190,99 @@ class BaseFragmentLogic(val rootView: View) {
     }
 
     private fun formatMoney(): String {
-        var finalString = ""
+        var moneyForm = ""
         when (pet.points) {
-            in 0..999 -> {
-                finalString = pet.points.toString()
-            }
+            in 0..999 -> moneyForm = pet.points.toString()
             in 1000..999999 -> {
                 val money1 = pet.points / 1000
-                val money2 = pet.points % 1000
-                finalString = money1.toString() + " " + money2.toString()
+                var money2 = ""
+                if (pet.points % 1000 == 0L) {
+                    money2 = "000"
+                } else if (pet.points % 1000 < 100) {
+                    if (pet.points % 1000 < 10) {
+                        money2 = "00" + (pet.points % 100).toString()
+                    } else {
+                        money2 = "0" + (pet.points % 100).toString()
+                    }
+                } else {
+                    money2 = (pet.points % 1000).toString()
+                }
+                moneyForm = money1.toString() + "," + money2 + " k"
             }
             in 1000000..999999999 -> {
                 val money1 = pet.points / 1000000
-                val money2 = (pet.points % 1000000) / 1000
-                val money3 = (pet.points % 1000)
-                finalString = money1.toString() + " " + money2.toString() + " " + money3.toString()
+                var money = pet.points % 1000000
+                money /= 1000
+                var money2 = ""
+                if (money % 1000 == 0L) {
+                    money2 = "000"
+                } else if (money % 1000 < 100) {
+                    if (money % 1000 < 10) {
+                        money2 = "00" + (money % 100).toString()
+                    } else {
+                        money2 = "0" + (money % 100).toString()
+                    }
+                } else {
+                    money2 = (money % 1000).toString()
+                }
+                moneyForm = money1.toString() + "," + money2.toString() + " kk"
             }
             in 1000000000..999999999999 -> {
                 val money1 = pet.points / 1000000000
-                val money2 = (pet.points % 1000000000) / 1000000
-                val money3 = (pet.points % 1000000) / 1000
-                val money4 = (pet.points % 1000)
-                finalString =
-                    money1.toString() + " " + money2.toString() + " " + money3.toString() +
-                            " " + money4.toString()
+                var money = pet.points % 1000000000
+                money /= 1000000
+                var money2 = ""
+                if (money % 1000 == 0L) {
+                    money2 = "000"
+                } else if (money % 1000 < 100) {
+                    if (money % 1000 < 10) {
+                        money2 = "00" + (money % 100).toString()
+                    } else {
+                        money2 = "0" + (money % 100).toString()
+                    }
+                } else {
+                    money2 = (money % 1000).toString()
+                }
+                moneyForm = money1.toString() + "," + money2 + " kkk"
+            }
+            in 1000000000000..999999999999999 -> {
+                val money1 = pet.points / 1000000000000
+                var money = pet.points % 1000000000000
+                money /= 1000000000
+                var money2 = ""
+                if (money % 1000 == 0L) {
+                    money2 = "000"
+                } else if (money % 1000 < 100) {
+                    if (money % 1000 < 10) {
+                        money2 = "00" + (money % 100).toString()
+                    } else {
+                        money2 = "0" + (money % 100).toString()
+                    }
+                } else {
+                    money2 = (money % 1000).toString()
+                }
+                moneyForm = money1.toString() + "," + money2 + " kkkk"
+            }
+            in 1000000000000000..999999999999999999 -> {
+                val money1 = pet.points / 1000000000000000
+                var money = pet.points % 1000000000000000
+                money /= 1000000000000
+                var money2 = ""
+                if (money % 1000 == 0L) {
+                    money2 = "000"
+                } else if (money % 1000 < 100) {
+                    if (money % 1000 < 10) {
+                        money2 = "00" + (money % 100).toString()
+                    } else {
+                        money2 = "0" + (money % 100).toString()
+                    }
+                } else {
+                    money2 = (money % 1000).toString()
+                }
+                moneyForm = money1.toString() + "," + money2 + " kkkkk"
             }
         }
-        return finalString
+        return moneyForm
     }
 
 }

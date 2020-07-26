@@ -6,7 +6,7 @@ data class Pet(
     var funLvl: Int,
     var maxFunLvl: Int,
     var look: Look,
-    var points: Int,
+    var points: Long,
     var age: Long,
     var isAlive: Boolean,
     var foodAmount: Int,

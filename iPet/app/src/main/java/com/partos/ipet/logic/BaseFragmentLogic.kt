@@ -59,19 +59,25 @@ class BaseFragmentLogic(val rootView: View) {
     private fun initListeners() {
         foodButton.setOnClickListener {
             if (pet.isAlive) {
+                if (pet.maxHungerLvl - pet.hungerLvl >= pet.foodAmount) {
+                    pet.points += pet.foodAmount
+                } else {
+                    pet.points += pet.maxHungerLvl - pet.hungerLvl
+                }
                 pet.hungerLvl += pet.foodAmount
                 if (pet.hungerLvl > pet.maxHungerLvl) {
                     pet.hungerLvl = pet.maxHungerLvl
                 }
                 showProgress()
+                moneyText.text = formatMoney(pet.points)
             }
         }
         playButton.setOnClickListener {
             if (pet.isAlive) {
                 if (pet.maxFunLvl - pet.funLvl >= pet.funAmount) {
-                    pet.points += pet.funAmount
+                    pet.points += pet.funAmount * 2
                 } else {
-                    pet.points += pet.maxFunLvl - pet.funLvl
+                    pet.points += (pet.maxFunLvl - pet.funLvl) * 2
                 }
                 pet.funLvl += pet.funAmount
                 if (pet.funLvl > pet.maxFunLvl) {
@@ -223,7 +229,7 @@ class BaseFragmentLogic(val rootView: View) {
                     if (isBark) {
                         position = 10
                     }
-                    when(position) {
+                    when (position) {
                         10 -> {
                             image.setImageDrawable(rootView.context.getDrawable(R.drawable.normal_bark))
                             soundPool.play(soundBark, 1F, 1F, 0, 0, 1F)
@@ -239,7 +245,7 @@ class BaseFragmentLogic(val rootView: View) {
                 } else {
                     when (position) {
                         0, 2, 4 -> image.setImageDrawable(rootView.context.getDrawable(R.drawable.normal_1))
-                        1, 3  -> image.setImageDrawable(rootView.context.getDrawable(R.drawable.normal_2))
+                        1, 3 -> image.setImageDrawable(rootView.context.getDrawable(R.drawable.normal_2))
                         5 -> {
                             image.setImageDrawable(rootView.context.getDrawable(R.drawable.normal_2))
                             position = -1

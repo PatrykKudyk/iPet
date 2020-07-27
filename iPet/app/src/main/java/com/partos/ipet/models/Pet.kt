@@ -10,5 +10,6 @@ data class Pet(
     var age: Long,
     var isAlive: Boolean,
     var foodAmount: Int,
-    var funAmount: Int
+    var funAmount: Int,
+    var upgradePrices: UpgradePrices
 )

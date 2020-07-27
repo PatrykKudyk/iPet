@@ -7,4 +7,6 @@
     <string name="hours">h</string>
     <string name="days">d</string>
     <string name="weeks">w</string>
+    <string name="amount">Amount</string>
+    <string name="max">Max</string>
 </resources>

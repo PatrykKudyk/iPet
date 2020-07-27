@@ -231,12 +231,12 @@ class BaseFragmentLogic(val rootView: View) {
                     }
                     when (position) {
                         10 -> {
-                            image.setImageDrawable(rootView.context.getDrawable(R.drawable.normal_bark))
+                            image.setImageDrawable(rootView.context.getDrawable(R.drawable.dog_bark))
                             soundPool.play(soundBark, 1F, 1F, 0, 0, 1F)
                             isBark = false
                         }
                         11 -> {
-                            image.setImageDrawable(rootView.context.getDrawable(R.drawable.normal_2))
+                            image.setImageDrawable(rootView.context.getDrawable(R.drawable.dog_normal_2))
                             position = -1
                             pet.isBarking = false
                             isBark = true
@@ -244,10 +244,10 @@ class BaseFragmentLogic(val rootView: View) {
                     }
                 } else {
                     when (position) {
-                        0, 2, 4 -> image.setImageDrawable(rootView.context.getDrawable(R.drawable.normal_1))
-                        1, 3 -> image.setImageDrawable(rootView.context.getDrawable(R.drawable.normal_2))
+                        0, 2, 4 -> image.setImageDrawable(rootView.context.getDrawable(R.drawable.dog_normal))
+                        1, 3 -> image.setImageDrawable(rootView.context.getDrawable(R.drawable.dog_normal_2))
                         5 -> {
-                            image.setImageDrawable(rootView.context.getDrawable(R.drawable.normal_2))
+                            image.setImageDrawable(rootView.context.getDrawable(R.drawable.dog_normal_2))
                             position = -1
                         }
                     }

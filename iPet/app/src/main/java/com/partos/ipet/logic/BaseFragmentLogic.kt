@@ -42,6 +42,14 @@ class BaseFragmentLogic(val rootView: View) {
     private lateinit var upgradeFoodMaxCost: TextView
     private lateinit var upgradePlayCost: TextView
     private lateinit var upgradePlayMaxCost: TextView
+    private lateinit var shopCard1: CardView
+    private lateinit var shopCard2: CardView
+    private lateinit var shopCard3: CardView
+    private lateinit var shopCard4: CardView
+    private lateinit var shopCard5: CardView
+    private lateinit var shopCard6: CardView
+    private lateinit var shopCard7: CardView
+    private lateinit var shopCard8: CardView
 
 
     fun initFragment() {
@@ -144,9 +152,8 @@ class BaseFragmentLogic(val rootView: View) {
                 upgradesCard.visibility = View.GONE
             }
         }
-        image.setOnClickListener {
-            pet.isBarking = true
-        }
+
+
     }
 
     private fun initViews() {
@@ -172,6 +179,14 @@ class BaseFragmentLogic(val rootView: View) {
         upgradeFoodMaxCost = rootView.findViewById(R.id.upgrade_food_max_cost)
         upgradePlayCost = rootView.findViewById(R.id.upgrade_play_cost)
         upgradePlayMaxCost = rootView.findViewById(R.id.upgrade_play_max_cost)
+        shopCard1 = rootView.findViewById(R.id.shop_card_1)
+        shopCard2 = rootView.findViewById(R.id.shop_card_2)
+        shopCard3 = rootView.findViewById(R.id.shop_card_3)
+        shopCard4 = rootView.findViewById(R.id.shop_card_4)
+        shopCard5 = rootView.findViewById(R.id.shop_card_5)
+        shopCard6 = rootView.findViewById(R.id.shop_card_6)
+        shopCard7 = rootView.findViewById(R.id.shop_card_7)
+        shopCard8 = rootView.findViewById(R.id.shop_card_8)
     }
 
     private fun initPet() {
@@ -195,8 +210,7 @@ class BaseFragmentLogic(val rootView: View) {
                 150,
                 70,
                 120
-            ),
-            false
+            )
         )
     }
 
@@ -217,7 +231,6 @@ class BaseFragmentLogic(val rootView: View) {
         var threadHandler = Handler(looperThread.looper)
         var position = 0
         var isReady = 0
-        var isBark = true
         foodText.text = pet.foodAmount.toString()
         playText.text = pet.funAmount.toString()
         moneyText.text = formatMoney(pet.points)
@@ -225,31 +238,43 @@ class BaseFragmentLogic(val rootView: View) {
         showProgress()
         threadHandler.post(object : Runnable {
             override fun run() {
-                if (pet.isBarking) {
-                    if (isBark) {
-                        position = 10
-                    }
-                    when (position) {
-                        10 -> {
-                            image.setImageDrawable(rootView.context.getDrawable(R.drawable.dog_bark))
-                            soundPool.play(soundBark, 1F, 1F, 0, 0, 1F)
-                            isBark = false
-                        }
-                        11 -> {
-                            image.setImageDrawable(rootView.context.getDrawable(R.drawable.dog_normal_2))
-                            position = -1
-                            pet.isBarking = false
-                            isBark = true
+                when (position) {
+                    0, 2, 4 -> {
+                        when (pet.look.petType) {
+                            "dog" -> image.setImageDrawable(rootView.context.getDrawable(R.drawable.dog_normal))
+                            "cat" ->  image.setImageDrawable(rootView.context.getDrawable(R.drawable.cat_normal))
+                            "fish" ->  image.setImageDrawable(rootView.context.getDrawable(R.drawable.fish_normal))
+                            "frog" ->  image.setImageDrawable(rootView.context.getDrawable(R.drawable.frog_normal))
+                            "mouse" ->  image.setImageDrawable(rootView.context.getDrawable(R.drawable.mouse_normal))
+                            "rabbit" ->  image.setImageDrawable(rootView.context.getDrawable(R.drawable.rabbit_normal))
+                            "panda" ->  image.setImageDrawable(rootView.context.getDrawable(R.drawable.panda_normal))
+                            "penguin" ->  image.setImageDrawable(rootView.context.getDrawable(R.drawable.penguin_normal))
                         }
                     }
-                } else {
-                    when (position) {
-                        0, 2, 4 -> image.setImageDrawable(rootView.context.getDrawable(R.drawable.dog_normal))
-                        1, 3 -> image.setImageDrawable(rootView.context.getDrawable(R.drawable.dog_normal_2))
-                        5 -> {
-                            image.setImageDrawable(rootView.context.getDrawable(R.drawable.dog_normal_2))
-                            position = -1
+                    1, 3 -> {
+                        when (pet.look.petType) {
+                            "dog" -> image.setImageDrawable(rootView.context.getDrawable(R.drawable.dog_normal_2))
+                            "cat" ->  image.setImageDrawable(rootView.context.getDrawable(R.drawable.cat_normal_2))
+                            "fish" ->  image.setImageDrawable(rootView.context.getDrawable(R.drawable.fish_normal_2))
+                            "frog" ->  image.setImageDrawable(rootView.context.getDrawable(R.drawable.frog_normal_2))
+                            "mouse" ->  image.setImageDrawable(rootView.context.getDrawable(R.drawable.mouse_normal_2))
+                            "rabbit" ->  image.setImageDrawable(rootView.context.getDrawable(R.drawable.rabbit_normal_2))
+                            "panda" ->  image.setImageDrawable(rootView.context.getDrawable(R.drawable.panda_normal_2))
+                            "penguin" ->  image.setImageDrawable(rootView.context.getDrawable(R.drawable.penguin_normal_2))
                         }
+                    }
+                    5 -> {
+                        when (pet.look.petType) {
+                            "dog" -> image.setImageDrawable(rootView.context.getDrawable(R.drawable.dog_normal_2))
+                            "cat" ->  image.setImageDrawable(rootView.context.getDrawable(R.drawable.cat_normal_2))
+                            "fish" ->  image.setImageDrawable(rootView.context.getDrawable(R.drawable.fish_normal_2))
+                            "frog" ->  image.setImageDrawable(rootView.context.getDrawable(R.drawable.frog_normal_2))
+                            "mouse" ->  image.setImageDrawable(rootView.context.getDrawable(R.drawable.mouse_normal_2))
+                            "rabbit" ->  image.setImageDrawable(rootView.context.getDrawable(R.drawable.rabbit_normal_2))
+                            "panda" ->  image.setImageDrawable(rootView.context.getDrawable(R.drawable.panda_normal_2))
+                            "penguin" ->  image.setImageDrawable(rootView.context.getDrawable(R.drawable.penguin_normal_2))
+                        }
+                        position = -1
                     }
                 }
                 if (isReady == 2) {

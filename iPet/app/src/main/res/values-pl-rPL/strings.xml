@@ -3,4 +3,9 @@
     <string name="app_name">iPet</string>
     <string name="hunger">Głód</string>
     <string name="fun">Zabawa</string>
+    <string name="seconds">sek</string>
+    <string name="minutes">min</string>
+    <string name="hours">g</string>
+    <string name="days">d</string>
+    <string name="weeks">w</string>
 </resources>

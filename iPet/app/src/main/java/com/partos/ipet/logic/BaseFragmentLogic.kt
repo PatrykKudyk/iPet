@@ -30,6 +30,7 @@ class BaseFragmentLogic(val rootView: View) {
     private lateinit var foodText: TextView
     private lateinit var playText: TextView
     private lateinit var moneyText: TextView
+    private lateinit var ageText: TextView
 
     fun initFragment() {
         looperThread.start()
@@ -82,6 +83,7 @@ class BaseFragmentLogic(val rootView: View) {
         foodText = rootView.findViewById(R.id.text_food)
         playText = rootView.findViewById(R.id.text_play)
         moneyText = rootView.findViewById(R.id.text_money)
+        ageText = rootView.findViewById(R.id.text_time)
     }
 
     private fun initPet() {
@@ -95,16 +97,12 @@ class BaseFragmentLogic(val rootView: View) {
                 1,
                 1
             ),
-            1000,
+            0,
             0,
             true,
             5,
             10
         )
-        hungerText.text = rootView.context.getString(R.string.hunger) + " 100/100"
-        funText.text = rootView.context.getString(R.string.`fun`) + " 100/100"
-        hungerProgress.progress = 100
-        funProgress.progress = 100
     }
 
     private fun initSoundPool() {
@@ -127,6 +125,8 @@ class BaseFragmentLogic(val rootView: View) {
         foodText.text = pet.foodAmount.toString()
         playText.text = pet.funAmount.toString()
         moneyText.text = formatMoney()
+        showAge()
+        showProgress()
         threadHandler.post(object : Runnable {
             override fun run() {
                 when (position) {
@@ -152,8 +152,10 @@ class BaseFragmentLogic(val rootView: View) {
                     }
                     (rootView.context as MainActivity).runOnUiThread {
                         showProgress()
+                        showAge()
                     }
                     isReady = 0
+                    pet.age++
                 }
                 isReady++
                 position++
@@ -168,6 +170,47 @@ class BaseFragmentLogic(val rootView: View) {
                 }
             }
         })
+    }
+
+    private fun showAge() {
+        when (pet.age) {
+            in 0..59 -> {
+                ageText.text =
+                    pet.age.toString() + " " + rootView.context.getString(R.string.seconds)
+            }
+            in 60..3599 -> {
+                ageText.text =
+                    (pet.age / 60L).toString() + " " + rootView.context.getString(R.string.minutes) +
+                            " " + (pet.age % 60L).toString() + " " + rootView.context.getString(R.string.seconds)
+            }
+            in 3600..86399 -> {
+                ageText.text =
+                    (pet.age / 3600L).toString() + " " + rootView.context.getString(R.string.hours) +
+                            " " + ((pet.age % 3600L) / 60).toString() + " " + rootView.context.getString(
+                        R.string.minutes
+                    ) +
+                            " " + ((pet.age % 3600L) % 60).toString() + " " + rootView.context.getString(
+                        R.string.seconds
+                    )
+            }
+            in 86400..604799 -> {
+                ageText.text =
+                    (pet.age / 86400L).toString() + " " + rootView.context.getString(R.string.days) +
+                            " " + ((pet.age % 86400L) / 3600L).toString() + " " +
+                            rootView.context.getString(R.string.hours) + " " +
+                            (((pet.age % 86400L) % 3600L) / 60).toString() + " " +
+                            rootView.context.getString(R.string.minutes)
+
+            }
+            else -> {
+                ageText.text =
+                    (pet.age / 604800L).toString() + " " + rootView.context.getString(R.string.weeks) +
+                            " " + ((pet.age % 604800L) / 86400L).toString() + " " +
+                            rootView.context.getString(R.string.days) + " " +
+                            (((pet.age % 604800L) % 86400L) / 3600).toString() + " " +
+                            rootView.context.getString(R.string.hours)
+            }
+        }
     }
 
     private fun checkIfDead(): Boolean {

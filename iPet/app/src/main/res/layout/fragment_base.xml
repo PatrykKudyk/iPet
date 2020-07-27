@@ -229,12 +229,12 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="1" />
+                            android:layout_weight="0.5" />
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="7"
+                            android:layout_weight="5"
                             android:src="@drawable/dog_food" />
 
                         <TextView
@@ -245,6 +245,36 @@
                             android:gravity="center"
                             android:text="@string/amount"
                             android:textSize="12dip" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+
+                            <TextView
+                                android:id="@+id/upgrade_food_cost"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="6"
+                                android:fontFamily="@font/dustismo_bold"
+                                android:gravity="right"
+                                tools:text="1 k" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.5" />
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:src="@drawable/coin" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -278,12 +308,12 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="1" />
+                            android:layout_weight="0.5" />
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="7"
+                            android:layout_weight="5"
                             android:src="@drawable/dog_food" />
 
                         <TextView
@@ -294,6 +324,36 @@
                             android:gravity="center"
                             android:text="@string/max"
                             android:textSize="12dip" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+
+                            <TextView
+                                android:id="@+id/upgrade_food_max_cost"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="6"
+                                android:fontFamily="@font/dustismo_bold"
+                                android:gravity="right"
+                                tools:text="1 k" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.5" />
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:src="@drawable/coin" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -328,12 +388,12 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="1"/>
+                            android:layout_weight="0.5"/>
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="7"
+                            android:layout_weight="5"
                             android:src="@drawable/ball"/>
 
                         <TextView
@@ -344,6 +404,36 @@
                             android:gravity="center"
                             android:fontFamily="@font/dustismo_bold"
                             android:textSize="12dip"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+
+                            <TextView
+                                android:id="@+id/upgrade_play_cost"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="6"
+                                android:fontFamily="@font/dustismo_bold"
+                                android:gravity="right"
+                                tools:text="1 k" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.5" />
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:src="@drawable/coin" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -378,12 +468,12 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="1"/>
+                            android:layout_weight="0.5"/>
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="7"
+                            android:layout_weight="5"
                             android:src="@drawable/ball"/>
 
                         <TextView
@@ -394,6 +484,36 @@
                             android:gravity="center"
                             android:fontFamily="@font/dustismo_bold"
                             android:textSize="12dip"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:orientation="horizontal"
+                            android:weightSum="10">
+
+                            <TextView
+                                android:id="@+id/upgrade_play_max_cost"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="6"
+                                android:fontFamily="@font/dustismo_bold"
+                                android:gravity="right"
+                                tools:text="1 k" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.5" />
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:src="@drawable/coin" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 

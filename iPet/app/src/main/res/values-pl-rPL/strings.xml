@@ -13,5 +13,6 @@
     <string name="buy_question">Kupienie nowego zwierzaka zabije poprzedniego. Jesteś pewien zakupu?</string>
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
+    <string name="toast_not_enough_money">Nie masz wystarczających pieniędzy</string>
 
 </resources>

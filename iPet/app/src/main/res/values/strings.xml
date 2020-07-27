@@ -9,4 +9,8 @@
     <string name="weeks">w</string>
     <string name="amount">Amount</string>
     <string name="max">Max</string>
+    <string name="buy_question">Buying new pet will kill the current one. Are you sure to buy the new one?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="toast_not_enough_money">You don\'t have enough money</string>
 </resources>

@@ -91,7 +91,8 @@ class BaseFragmentLogic(val rootView: View) {
                 upgradeFood.setOnClickListener {
                     if (pet.points >= pet.upgradePrices.hungerAmount) {
                         pet.points -= pet.upgradePrices.hungerAmount
-                        pet.upgradePrices.hungerAmount = (pet.upgradePrices.hungerAmount * 1.1).toLong()
+                        pet.upgradePrices.hungerAmount =
+                            (pet.upgradePrices.hungerAmount * 1.1).toLong()
                         pet.foodAmount = ((pet.foodAmount * 1.1) + 1).toInt()
                         moneyText.text = formatMoney(pet.points)
                         upgradeFoodCost.text = formatMoney(pet.upgradePrices.hungerAmount)
@@ -137,9 +138,13 @@ class BaseFragmentLogic(val rootView: View) {
                 upgradesCard.visibility = View.GONE
             }
         }
+        image.setOnClickListener {
+            pet.isBarking = true
+        }
     }
 
     private fun initViews() {
+        image = rootView.findViewById(R.id.dog_image)
         foodButton = rootView.findViewById(R.id.button_food)
         upgradeButton = rootView.findViewById(R.id.button_upgrades)
         playButton = rootView.findViewById(R.id.button_play)
@@ -184,7 +189,8 @@ class BaseFragmentLogic(val rootView: View) {
                 150,
                 70,
                 120
-            )
+            ),
+            false
         )
     }
 
@@ -205,6 +211,7 @@ class BaseFragmentLogic(val rootView: View) {
         var threadHandler = Handler(looperThread.looper)
         var position = 0
         var isReady = 0
+        var isBark = true
         foodText.text = pet.foodAmount.toString()
         playText.text = pet.funAmount.toString()
         moneyText.text = formatMoney(pet.points)
@@ -212,16 +219,31 @@ class BaseFragmentLogic(val rootView: View) {
         showProgress()
         threadHandler.post(object : Runnable {
             override fun run() {
-                when (position) {
-                    0, 2, 4 -> image.setImageDrawable(rootView.context.getDrawable(R.drawable.normal_1))
-                    1, 3, 6 -> image.setImageDrawable(rootView.context.getDrawable(R.drawable.normal_2))
-                    5, 7 -> {
-                        image.setImageDrawable(rootView.context.getDrawable(R.drawable.normal_bark))
-                        soundPool.play(soundBark, 1F, 1F, 0, 0, 1F)
+                if (pet.isBarking) {
+                    if (isBark) {
+                        position = 10
                     }
-                    8 -> {
-                        image.setImageDrawable(rootView.context.getDrawable(R.drawable.normal_2))
-                        position = 0
+                    when(position) {
+                        10 -> {
+                            image.setImageDrawable(rootView.context.getDrawable(R.drawable.normal_bark))
+                            soundPool.play(soundBark, 1F, 1F, 0, 0, 1F)
+                            isBark = false
+                        }
+                        11 -> {
+                            image.setImageDrawable(rootView.context.getDrawable(R.drawable.normal_2))
+                            position = -1
+                            pet.isBarking = false
+                            isBark = true
+                        }
+                    }
+                } else {
+                    when (position) {
+                        0, 2, 4 -> image.setImageDrawable(rootView.context.getDrawable(R.drawable.normal_1))
+                        1, 3  -> image.setImageDrawable(rootView.context.getDrawable(R.drawable.normal_2))
+                        5 -> {
+                            image.setImageDrawable(rootView.context.getDrawable(R.drawable.normal_2))
+                            position = -1
+                        }
                     }
                 }
                 if (isReady == 2) {

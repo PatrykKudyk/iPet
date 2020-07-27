@@ -1,5 +1,6 @@
 package com.partos.ipet.logic
 
+import android.app.Activity
 import android.media.AudioAttributes
 import android.media.SoundPool
 import android.os.Handler
@@ -464,7 +465,7 @@ class BaseFragmentLogic(val rootView: View) {
                 1,
                 1
             ),
-            0,
+            900000,
             0,
             true,
             5,
@@ -502,6 +503,7 @@ class BaseFragmentLogic(val rootView: View) {
             playText.text = pet.funAmount.toString()
             moneyText.text = formatMoney(pet.points)
             val activity = (rootView.context as MainActivity)
+            initIcons(activity)
             showAge()
             showProgress()
             threadHandler.post(object : Runnable {
@@ -623,6 +625,35 @@ class BaseFragmentLogic(val rootView: View) {
                 }
             })
         }, 300)
+    }
+
+    private fun initIcons(activity: Activity) {
+        when (pet.look.petType) {
+            "dog" -> activity.runOnUiThread {
+                foodButton.setImageDrawable(rootView.context.getDrawable(R.drawable.dog_food))
+            }
+            "cat" -> activity.runOnUiThread {
+                foodButton.setImageDrawable(rootView.context.getDrawable(R.drawable.cat_food))
+            }
+            "fish" -> activity.runOnUiThread {
+                foodButton.setImageDrawable(rootView.context.getDrawable(R.drawable.fish_food))
+            }
+            "frog" -> activity.runOnUiThread {
+                foodButton.setImageDrawable(rootView.context.getDrawable(R.drawable.bug))
+            }
+            "mouse" -> activity.runOnUiThread {
+                foodButton.setImageDrawable(rootView.context.getDrawable(R.drawable.cheese))
+            }
+            "rabbit" -> activity.runOnUiThread {
+                foodButton.setImageDrawable(rootView.context.getDrawable(R.drawable.carrot))
+            }
+            "panda" -> activity.runOnUiThread {
+                foodButton.setImageDrawable(rootView.context.getDrawable(R.drawable.bamboo))
+            }
+            "penguin" -> activity.runOnUiThread {
+                foodButton.setImageDrawable(rootView.context.getDrawable(R.drawable.fish))
+            }
+        }
     }
 
     private fun showAge() {

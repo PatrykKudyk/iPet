@@ -187,6 +187,7 @@ class BaseFragmentLogic(val rootView: View) {
                 shopChoice.visibility = View.GONE
                 shopQuestion.visibility = View.VISIBLE
                 shopYes.setOnClickListener {
+                    pet.points -= 100
                     pet.look.petType = "cat"
                     pet.hungerLvl = 0
                     Handler().postDelayed({
@@ -213,6 +214,7 @@ class BaseFragmentLogic(val rootView: View) {
                 shopChoice.visibility = View.GONE
                 shopQuestion.visibility = View.VISIBLE
                 shopYes.setOnClickListener {
+                    pet.points -= 300
                     pet.look.petType = "fish"
                     pet.hungerLvl = 0
                     Handler().postDelayed({
@@ -240,6 +242,7 @@ class BaseFragmentLogic(val rootView: View) {
                 shopChoice.visibility = View.GONE
                 shopQuestion.visibility = View.VISIBLE
                 shopYes.setOnClickListener {
+                    pet.points -= 1000
                     pet.look.petType = "frog"
                     pet.hungerLvl = 0
                     Handler().postDelayed({
@@ -266,6 +269,7 @@ class BaseFragmentLogic(val rootView: View) {
                 shopChoice.visibility = View.GONE
                 shopQuestion.visibility = View.VISIBLE
                 shopYes.setOnClickListener {
+                    pet.points -= 5000
                     pet.look.petType = "mouse"
                     pet.hungerLvl = 0
                     Handler().postDelayed({
@@ -292,6 +296,7 @@ class BaseFragmentLogic(val rootView: View) {
                 shopChoice.visibility = View.GONE
                 shopQuestion.visibility = View.VISIBLE
                 shopYes.setOnClickListener {
+                    pet.points -= 20000
                     pet.look.petType = "rabbit"
                     pet.hungerLvl = 0
                     Handler().postDelayed({
@@ -318,6 +323,7 @@ class BaseFragmentLogic(val rootView: View) {
                 shopChoice.visibility = View.GONE
                 shopQuestion.visibility = View.VISIBLE
                 shopYes.setOnClickListener {
+                    pet.points -= 50000
                     pet.look.petType = "panda"
                     pet.hungerLvl = 0
                     Handler().postDelayed({
@@ -344,6 +350,7 @@ class BaseFragmentLogic(val rootView: View) {
                 shopChoice.visibility = View.GONE
                 shopQuestion.visibility = View.VISIBLE
                 shopYes.setOnClickListener {
+                    pet.points -= 100000
                     pet.look.petType = "penguin"
                     pet.hungerLvl = 0
                     Handler().postDelayed({

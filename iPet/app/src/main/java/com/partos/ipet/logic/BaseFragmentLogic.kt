@@ -4,10 +4,9 @@ import android.media.AudioAttributes
 import android.media.SoundPool
 import android.os.Handler
 import android.view.View
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.partos.ipet.R
 import com.partos.ipet.activities.MainActivity
 import com.partos.ipet.models.Look
@@ -42,6 +41,7 @@ class BaseFragmentLogic(val rootView: View) {
     private lateinit var upgradeFoodMaxCost: TextView
     private lateinit var upgradePlayCost: TextView
     private lateinit var upgradePlayMaxCost: TextView
+    private lateinit var shopCard: CardView
     private lateinit var shopCard1: CardView
     private lateinit var shopCard2: CardView
     private lateinit var shopCard3: CardView
@@ -50,6 +50,10 @@ class BaseFragmentLogic(val rootView: View) {
     private lateinit var shopCard6: CardView
     private lateinit var shopCard7: CardView
     private lateinit var shopCard8: CardView
+    private lateinit var shopChoice: LinearLayout
+    private lateinit var shopQuestion: ConstraintLayout
+    private lateinit var shopYes: Button
+    private lateinit var shopNo: Button
 
 
     fun initFragment() {
@@ -60,7 +64,7 @@ class BaseFragmentLogic(val rootView: View) {
         initListeners()
         image = rootView.findViewById(R.id.dog_image)
         Handler().postDelayed({
-            animateDog()
+            mainLoop()
         }, 300)
     }
 
@@ -152,8 +156,47 @@ class BaseFragmentLogic(val rootView: View) {
                 upgradesCard.visibility = View.GONE
             }
         }
+        lookButton.setOnClickListener {
+            if (shopCard.visibility == View.GONE) {
+                shopCard.visibility = View.VISIBLE
+                shopChoice.visibility = View.VISIBLE
+            } else {
+                shopCard.visibility = View.GONE
+                shopChoice.visibility = View.VISIBLE
+            }
+        }
+        shopCard1.setOnClickListener {
+            shopChoice.visibility = View.GONE
+            shopQuestion.visibility = View.VISIBLE
+            shopYes.setOnClickListener{
+                pet.look.petType = "dog"
+                pet.isAlive = false
+                Handler().postDelayed({
+                    activatePet()
+                    mainLoop()
+                },1000)
+                shopCard.visibility = View.GONE
+            }
+            shopNo.setOnClickListener {
+                shopQuestion.visibility = View.GONE
+                shopChoice.visibility = View.VISIBLE
+            }
+        }
+    }
 
-
+    private fun activatePet() {
+        pet.hungerLvl = 100
+        pet.maxHungerLvl = 100
+        pet.funLvl = 100
+        pet.maxFunLvl = 100
+        pet.age = 0
+        pet.isAlive = true
+        pet.foodAmount = 10
+        pet.funAmount = 10
+        pet.upgradePrices.hungerAmount = 100
+        pet.upgradePrices.hungerMaxAmount = 150
+        pet.upgradePrices.funAmount = 70
+        pet.upgradePrices.funMaxAmount = 120
     }
 
     private fun initViews() {
@@ -179,6 +222,7 @@ class BaseFragmentLogic(val rootView: View) {
         upgradeFoodMaxCost = rootView.findViewById(R.id.upgrade_food_max_cost)
         upgradePlayCost = rootView.findViewById(R.id.upgrade_play_cost)
         upgradePlayMaxCost = rootView.findViewById(R.id.upgrade_play_max_cost)
+        shopCard = rootView.findViewById(R.id.shop_card)
         shopCard1 = rootView.findViewById(R.id.shop_card_1)
         shopCard2 = rootView.findViewById(R.id.shop_card_2)
         shopCard3 = rootView.findViewById(R.id.shop_card_3)
@@ -187,6 +231,10 @@ class BaseFragmentLogic(val rootView: View) {
         shopCard6 = rootView.findViewById(R.id.shop_card_6)
         shopCard7 = rootView.findViewById(R.id.shop_card_7)
         shopCard8 = rootView.findViewById(R.id.shop_card_8)
+        shopChoice = rootView.findViewById(R.id.shop_normal)
+        shopQuestion = rootView.findViewById(R.id.shop_question)
+        shopYes = rootView.findViewById(R.id.shop_button_yes)
+        shopNo = rootView.findViewById(R.id.shop_button_no)
     }
 
     private fun initPet() {
@@ -227,7 +275,7 @@ class BaseFragmentLogic(val rootView: View) {
         soundBark = soundPool.load(rootView.context, R.raw.bark, 1)
     }
 
-    private fun animateDog() {
+    private fun mainLoop() {
         var threadHandler = Handler(looperThread.looper)
         var position = 0
         var isReady = 0

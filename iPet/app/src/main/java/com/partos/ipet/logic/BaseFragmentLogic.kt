@@ -105,56 +105,82 @@ class BaseFragmentLogic(val rootView: View) {
                 upgradeFoodMaxCost.text = formatMoney(pet.upgradePrices.hungerMaxAmount)
                 upgradePlayCost.text = formatMoney(pet.upgradePrices.funAmount)
                 upgradePlayMaxCost.text = formatMoney(pet.upgradePrices.funMaxAmount)
-                upgradeFood.setOnClickListener {
-                    if (pet.points >= pet.upgradePrices.hungerAmount) {
-                        pet.points -= pet.upgradePrices.hungerAmount
-                        pet.upgradePrices.hungerAmount =
-                            (pet.upgradePrices.hungerAmount * 1.1).toLong()
-                        pet.foodAmount = ((pet.foodAmount * 1.1) + 1).toInt()
-                        moneyText.text = formatMoney(pet.points)
-                        upgradeFoodCost.text = formatMoney(pet.upgradePrices.hungerAmount)
-                        foodText.text = pet.foodAmount.toString()
-                    }
-                }
-                upgradeFoodMax.setOnClickListener {
-                    if (pet.points >= pet.upgradePrices.hungerMaxAmount) {
-                        pet.points -= pet.upgradePrices.hungerMaxAmount
-                        pet.upgradePrices.hungerMaxAmount =
-                            (pet.upgradePrices.hungerMaxAmount * 1.1).toLong()
-                        pet.maxHungerLvl = ((pet.maxHungerLvl * 1.1) + 1).toInt()
-                        moneyText.text = formatMoney(pet.points)
-                        upgradeFoodMaxCost.text = formatMoney(pet.upgradePrices.hungerMaxAmount)
-                        hungerProgress.max = pet.maxHungerLvl
-                        showProgress()
-                    }
-                }
-                upgradePlay.setOnClickListener {
-                    if (pet.points >= pet.upgradePrices.funAmount) {
-                        pet.points -= pet.upgradePrices.funAmount
-                        pet.upgradePrices.funAmount =
-                            (pet.upgradePrices.funAmount * 1.1).toLong()
-                        pet.funAmount = ((pet.funAmount * 1.1) + 1).toInt()
-                        moneyText.text = formatMoney(pet.points)
-                        upgradePlayCost.text = formatMoney(pet.upgradePrices.funAmount)
-                        playText.text = pet.funAmount.toString()
-                    }
-                }
-                upgradePlayMax.setOnClickListener {
-                    if (pet.points >= pet.upgradePrices.funMaxAmount) {
-                        pet.points -= pet.upgradePrices.funMaxAmount
-                        pet.upgradePrices.funMaxAmount =
-                            (pet.upgradePrices.funMaxAmount * 1.1).toLong()
-                        pet.maxFunLvl = ((pet.maxFunLvl * 1.1) + 1).toInt()
-                        moneyText.text = formatMoney(pet.points)
-                        upgradePlayMaxCost.text = formatMoney(pet.upgradePrices.funMaxAmount)
-                        funProgress.max = pet.maxFunLvl
-                        showProgress()
-                    }
-                }
             } else {
                 upgradesCard.visibility = View.GONE
             }
         }
+
+        upgradeFood.setOnClickListener {
+            if (pet.points >= pet.upgradePrices.hungerAmount) {
+                pet.points -= pet.upgradePrices.hungerAmount
+                pet.upgradePrices.hungerAmount =
+                    (pet.upgradePrices.hungerAmount * 1.1).toLong()
+                pet.foodAmount = ((pet.foodAmount * 1.1) + 1).toInt()
+                moneyText.text = formatMoney(pet.points)
+                upgradeFoodCost.text = formatMoney(pet.upgradePrices.hungerAmount)
+                foodText.text = pet.foodAmount.toString()
+            } else {
+                Toast.makeText(
+                    rootView.context,
+                    rootView.context.getString(R.string.toast_not_enough_money),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        upgradeFoodMax.setOnClickListener {
+            if (pet.points >= pet.upgradePrices.hungerMaxAmount) {
+                pet.points -= pet.upgradePrices.hungerMaxAmount
+                pet.upgradePrices.hungerMaxAmount =
+                    (pet.upgradePrices.hungerMaxAmount * 1.1).toLong()
+                pet.maxHungerLvl = ((pet.maxHungerLvl * 1.1) + 1).toInt()
+                moneyText.text = formatMoney(pet.points)
+                upgradeFoodMaxCost.text = formatMoney(pet.upgradePrices.hungerMaxAmount)
+                hungerProgress.max = pet.maxHungerLvl
+                showProgress()
+            } else {
+                Toast.makeText(
+                    rootView.context,
+                    rootView.context.getString(R.string.toast_not_enough_money),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        upgradePlay.setOnClickListener {
+            if (pet.points >= pet.upgradePrices.funAmount) {
+                pet.points -= pet.upgradePrices.funAmount
+                pet.upgradePrices.funAmount =
+                    (pet.upgradePrices.funAmount * 1.1).toLong()
+                pet.funAmount = ((pet.funAmount * 1.1) + 1).toInt()
+                moneyText.text = formatMoney(pet.points)
+                upgradePlayCost.text = formatMoney(pet.upgradePrices.funAmount)
+                playText.text = pet.funAmount.toString()
+            } else {
+                Toast.makeText(
+                    rootView.context,
+                    rootView.context.getString(R.string.toast_not_enough_money),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        upgradePlayMax.setOnClickListener {
+            if (pet.points >= pet.upgradePrices.funMaxAmount) {
+                pet.points -= pet.upgradePrices.funMaxAmount
+                pet.upgradePrices.funMaxAmount =
+                    (pet.upgradePrices.funMaxAmount * 1.1).toLong()
+                pet.maxFunLvl = ((pet.maxFunLvl * 1.1) + 1).toInt()
+                moneyText.text = formatMoney(pet.points)
+                upgradePlayMaxCost.text = formatMoney(pet.upgradePrices.funMaxAmount)
+                funProgress.max = pet.maxFunLvl
+                showProgress()
+            } else {
+                Toast.makeText(
+                    rootView.context,
+                    rootView.context.getString(R.string.toast_not_enough_money),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
         lookButton.setOnClickListener {
             if (shopCard.visibility == View.GONE) {
                 shopCard.visibility = View.VISIBLE
@@ -438,7 +464,7 @@ class BaseFragmentLogic(val rootView: View) {
                 1,
                 1
             ),
-            100000,
+            0,
             0,
             true,
             5,

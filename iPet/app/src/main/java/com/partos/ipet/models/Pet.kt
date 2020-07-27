@@ -11,5 +11,6 @@ data class Pet(
     var isAlive: Boolean,
     var foodAmount: Int,
     var funAmount: Int,
-    var upgradePrices: UpgradePrices
+    var upgradePrices: UpgradePrices,
+    var isBarking: Boolean
 )

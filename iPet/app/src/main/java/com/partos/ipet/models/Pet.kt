@@ -1,6 +1,7 @@
 package com.partos.ipet.models
 
 data class Pet(
+    var id: Long,
     var hungerLvl: Int,
     var maxHungerLvl: Int,
     var funLvl: Int,
@@ -8,7 +9,7 @@ data class Pet(
     var look: Look,
     var points: Long,
     var age: Long,
-    var isAlive: Boolean,
+    var isAlive: Int,
     var foodAmount: Int,
     var funAmount: Int,
     var upgradePrices: UpgradePrices

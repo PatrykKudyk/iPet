@@ -6,6 +6,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
+import com.partos.ipet.models.Date
 import com.partos.ipet.models.Look
 import com.partos.ipet.models.Pet
 import com.partos.ipet.models.UpgradePrices
@@ -29,6 +30,14 @@ object TableInfo : BaseColumns {
     const val TABLE_COLUMN_PET_UPGRADES_HUNGER_AMOUNT_MAX = "upgradesHungerAmountMax"
     const val TABLE_COLUMN_PET_UPGRADES_FUN_AMOUNT = "upgradesFunAmount"
     const val TABLE_COLUMN_PET_UPGRADES_FUN_AMOUNT_MAX = "upgradesFunAmountMax"
+    const val TABLE_NAME_DATE = "date"
+    const val TABLE_COLUMN_DATE_YEAR = "year"
+    const val TABLE_COLUMN_DATE_MONTH = "month"
+    const val TABLE_COLUMN_DATE_DAY = "day"
+    const val TABLE_COLUMN_DATE_HOUR = "hour"
+    const val TABLE_COLUMN_DATE_MINUTE = "minute"
+    const val TABLE_COLUMN_DATE_SECOND = "second"
+
 
 }
 
@@ -53,20 +62,32 @@ object BasicCommand {
                 "${TableInfo.TABLE_COLUMN_PET_UPGRADES_FUN_AMOUNT} INTEGER NOT NULL," +
                 "${TableInfo.TABLE_COLUMN_PET_UPGRADES_FUN_AMOUNT_MAX} INTEGER NOT NULL)"
 
+    const val SQL_CREATE_TABLE_DATE =
+        "CREATE TABLE ${TableInfo.TABLE_NAME_DATE} (" +
+                "${BaseColumns._ID} INTEGER PRIMARY KEY," +
+                "${TableInfo.TABLE_COLUMN_DATE_YEAR} INTEGER NOT NULL," +
+                "${TableInfo.TABLE_COLUMN_DATE_MONTH} INTEGER NOT NULL," +
+                "${TableInfo.TABLE_COLUMN_DATE_DAY} INTEGER NOT NULL," +
+                "${TableInfo.TABLE_COLUMN_DATE_HOUR} INTEGER NOT NULL," +
+                "${TableInfo.TABLE_COLUMN_DATE_MINUTE} INTEGER NOT NULL," +
+                "${TableInfo.TABLE_COLUMN_DATE_SECOND} INTEGER NOT NULL)"
+
     const val SQL_DELETE_TABLE_PET = "DROP TABLE IF EXISTS ${TableInfo.TABLE_NAME_PET}"
+    const val SQL_DELETE_TABLE_DATE = "DROP TABLE IF EXISTS ${TableInfo.TABLE_NAME_DATE}"
 }
 
 class DataBaseHelper(context: Context) :
     SQLiteOpenHelper(context, TableInfo.DATABASE_NAME, null, 1) {
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(BasicCommand.SQL_CREATE_TABLE_PET)
+        db?.execSQL(BasicCommand.SQL_CREATE_TABLE_DATE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, p1: Int, p2: Int) {
         db?.execSQL(BasicCommand.SQL_DELETE_TABLE_PET)
+        db?.execSQL(BasicCommand.SQL_DELETE_TABLE_DATE)
         onCreate(db)
     }
-
 
     fun getPets(): ArrayList<Pet> {
         var petList = ArrayList<Pet>()
@@ -185,6 +206,72 @@ class DataBaseHelper(context: Context) :
                 TableInfo.TABLE_NAME_PET,
                 BaseColumns._ID + "=?",
                 arrayOf(petId.toString())
+            )
+                .toLong()
+        db.close()
+        return Integer.parseInt("$success") != -1
+    }
+
+    fun getDate(): ArrayList<Date> {
+        var datesList = ArrayList<Date>()
+        val db = readableDatabase
+        val selectQuery = "Select * from ${TableInfo.TABLE_NAME_DATE}"
+        val result = db.rawQuery(selectQuery, null)
+        if (result.moveToFirst()) {
+            do {
+                var myDate = Date(
+                    result.getInt(result.getColumnIndex(BaseColumns._ID)).toLong(),
+                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_DATE_YEAR)),
+                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_DATE_MONTH)),
+                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_DATE_DAY)),
+                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_DATE_HOUR)),
+                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_DATE_MINUTE)),
+                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_DATE_SECOND))
+                )
+                datesList.add(myDate)
+            } while (result.moveToNext())
+        }
+        result.close()
+        db.close()
+        return datesList
+    }
+
+    fun addDate(date: Date) {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(TableInfo.TABLE_COLUMN_DATE_YEAR, date.year)
+        values.put(TableInfo.TABLE_COLUMN_DATE_MONTH, date.month)
+        values.put(TableInfo.TABLE_COLUMN_DATE_DAY, date.day)
+        values.put(TableInfo.TABLE_COLUMN_DATE_HOUR, date.hour)
+        values.put(TableInfo.TABLE_COLUMN_DATE_MINUTE, date.minute)
+        values.put(TableInfo.TABLE_COLUMN_DATE_SECOND, date.second)
+        db.insert(TableInfo.TABLE_NAME_DATE, null, values)
+        db.close()
+    }
+
+    fun updateDate(date: Date) {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(TableInfo.TABLE_COLUMN_DATE_YEAR, date.year)
+        values.put(TableInfo.TABLE_COLUMN_DATE_MONTH, date.month)
+        values.put(TableInfo.TABLE_COLUMN_DATE_DAY, date.day)
+        values.put(TableInfo.TABLE_COLUMN_DATE_HOUR, date.hour)
+        values.put(TableInfo.TABLE_COLUMN_DATE_MINUTE, date.minute)
+        values.put(TableInfo.TABLE_COLUMN_DATE_SECOND, date.second)
+        db.update(
+            TableInfo.TABLE_NAME_DATE, values, BaseColumns._ID + "=?",
+            arrayOf(date.id.toString())
+        )
+        db.close()
+    }
+
+    fun deleteDate(dateId: Long): Boolean {
+        val db = this.writableDatabase
+        val success =
+            db.delete(
+                TableInfo.TABLE_NAME_DATE,
+                BaseColumns._ID + "=?",
+                arrayOf(dateId.toString())
             )
                 .toLong()
         db.close()

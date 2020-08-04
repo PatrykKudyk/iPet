@@ -190,6 +190,9 @@ class BaseFragmentLogic(val rootView: View) {
             }
         }
         upgradeButton.setOnClickListener {
+            if (shopCard.visibility == View.VISIBLE) {
+                shopCard.visibility = View.GONE
+            }
             if (upgradesCard.visibility == View.GONE) {
                 upgradesCard.visibility = View.VISIBLE
                 upgradeFoodCost.text = formatMoney(pet.upgradePrices.hungerAmount)
@@ -277,6 +280,9 @@ class BaseFragmentLogic(val rootView: View) {
         }
 
         lookButton.setOnClickListener {
+            if (upgradesCard.visibility == View.VISIBLE) {
+                upgradesCard.visibility = View.GONE
+            }
             if (shopCard.visibility == View.GONE) {
                 shopCard.visibility = View.VISIBLE
                 shopChoice.visibility = View.VISIBLE

@@ -1,6 +1,7 @@
 package com.partos.ipet.logic
 
 import android.app.Activity
+import android.icu.util.Calendar
 import android.media.AudioAttributes
 import android.media.SoundPool
 import android.os.Handler
@@ -10,6 +11,8 @@ import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.partos.ipet.R
 import com.partos.ipet.activities.MainActivity
+import com.partos.ipet.db.DataBaseHelper
+import com.partos.ipet.models.Date
 import com.partos.ipet.models.Look
 import com.partos.ipet.models.Pet
 import com.partos.ipet.models.UpgradePrices
@@ -21,6 +24,8 @@ class BaseFragmentLogic(val rootView: View) {
     private lateinit var soundPool: SoundPool
     private var soundBark = 0
     private lateinit var pet: Pet
+    private lateinit var date: Date
+    private lateinit var db: DataBaseHelper
     private lateinit var foodButton: ImageView
     private lateinit var upgradeButton: ImageView
     private lateinit var playButton: ImageView
@@ -58,19 +63,102 @@ class BaseFragmentLogic(val rootView: View) {
 
 
     fun initFragment() {
+        db = DataBaseHelper(rootView.context)
         initViews()
         initSoundPool()
-        initPet()
         initListeners()
         image = rootView.findViewById(R.id.dog_image)
+        getPet()
+        getDate()
+        checkDateDiff()
         Handler().postDelayed({
             mainLoop()
         }, 300)
     }
 
+    private fun checkDateDiff() {
+        val nowCalendar = Calendar.getInstance()
+        val now = Date(
+            0,
+            nowCalendar.get(Calendar.YEAR),
+            nowCalendar.get(Calendar.MONTH),
+            nowCalendar.get(Calendar.DAY_OF_MONTH),
+            nowCalendar.get(Calendar.HOUR_OF_DAY),
+            nowCalendar.get(Calendar.MINUTE),
+            nowCalendar.get(Calendar.SECOND)
+        )
+        val then = db.getDate()[0]
+        val diff = DateHelper().getDiffInSeconds(then, now)
+        pet.hungerLvl -= diff.toInt()
+        if (pet.hungerLvl < 0){
+            pet.hungerLvl = 0
+        }
+        pet.funLvl -= diff.toInt() * 2
+        if (pet.funLvl < 0){
+            pet.funLvl = 0
+        }
+        if(pet.hungerLvl != 0) {
+            pet.age += diff
+        }
+        showProgress()
+        db.updatePet(pet)
+    }
+
+    private fun getDate() {
+        val today = Calendar.getInstance()
+        date = Date(
+            0,
+            today.get(Calendar.YEAR),
+            today.get(Calendar.MONTH),
+            today.get(Calendar.DAY_OF_MONTH),
+            today.get(Calendar.HOUR_OF_DAY),
+            today.get(Calendar.MINUTE),
+            today.get(Calendar.SECOND)
+        )
+        val someDate = db.getDate()
+        if (someDate.size == 0) {
+            db.addDate(date)
+            date = db.getDate()[0]
+        } else {
+            date = someDate[0]
+        }
+    }
+
+    private fun getPet() {
+        pet = Pet(
+            1,
+            100,
+            100,
+            100,
+            100,
+            Look(
+                "dog",
+                1,
+                1
+            ),
+            0,
+            0,
+            1,
+            5,
+            10,
+            UpgradePrices(
+                100,
+                150,
+                70,
+                120
+            )
+        )
+        var somePet = db.getPets()
+        if (somePet.size != 0) {
+            pet = somePet[0]
+        } else {
+            db.addPet(pet)
+        }
+    }
+
     private fun initListeners() {
         foodButton.setOnClickListener {
-            if (pet.isAlive) {
+            if (pet.isAlive == 1) {
                 if (pet.maxHungerLvl - pet.hungerLvl >= pet.foodAmount) {
                     pet.points += pet.foodAmount
                 } else {
@@ -80,12 +168,13 @@ class BaseFragmentLogic(val rootView: View) {
                 if (pet.hungerLvl > pet.maxHungerLvl) {
                     pet.hungerLvl = pet.maxHungerLvl
                 }
+                db.updatePet(pet)
                 showProgress()
                 moneyText.text = formatMoney(pet.points)
             }
         }
         playButton.setOnClickListener {
-            if (pet.isAlive) {
+            if (pet.isAlive == 1) {
                 if (pet.maxFunLvl - pet.funLvl >= pet.funAmount) {
                     pet.points += pet.funAmount * 2
                 } else {
@@ -95,6 +184,7 @@ class BaseFragmentLogic(val rootView: View) {
                 if (pet.funLvl > pet.maxFunLvl) {
                     pet.funLvl = pet.maxFunLvl
                 }
+                db.updatePet(pet)
                 showProgress()
                 moneyText.text = formatMoney(pet.points)
             }
@@ -120,6 +210,7 @@ class BaseFragmentLogic(val rootView: View) {
                 moneyText.text = formatMoney(pet.points)
                 upgradeFoodCost.text = formatMoney(pet.upgradePrices.hungerAmount)
                 foodText.text = pet.foodAmount.toString()
+                db.updatePet(pet)
             } else {
                 Toast.makeText(
                     rootView.context,
@@ -137,6 +228,7 @@ class BaseFragmentLogic(val rootView: View) {
                 moneyText.text = formatMoney(pet.points)
                 upgradeFoodMaxCost.text = formatMoney(pet.upgradePrices.hungerMaxAmount)
                 hungerProgress.max = pet.maxHungerLvl
+                db.updatePet(pet)
                 showProgress()
             } else {
                 Toast.makeText(
@@ -155,6 +247,7 @@ class BaseFragmentLogic(val rootView: View) {
                 moneyText.text = formatMoney(pet.points)
                 upgradePlayCost.text = formatMoney(pet.upgradePrices.funAmount)
                 playText.text = pet.funAmount.toString()
+                db.updatePet(pet)
             } else {
                 Toast.makeText(
                     rootView.context,
@@ -172,6 +265,7 @@ class BaseFragmentLogic(val rootView: View) {
                 moneyText.text = formatMoney(pet.points)
                 upgradePlayMaxCost.text = formatMoney(pet.upgradePrices.funMaxAmount)
                 funProgress.max = pet.maxFunLvl
+                db.updatePet(pet)
                 showProgress()
             } else {
                 Toast.makeText(
@@ -195,9 +289,10 @@ class BaseFragmentLogic(val rootView: View) {
             shopChoice.visibility = View.GONE
             shopQuestion.visibility = View.VISIBLE
             shopYes.setOnClickListener {
-                pet.look.petType = "dog"
                 pet.hungerLvl = 0
+                db.updatePet(pet)
                 Handler().postDelayed({
+                    pet.look.petType = "dog"
                     activatePet()
                     mainLoop()
                 }, 1000)
@@ -215,9 +310,10 @@ class BaseFragmentLogic(val rootView: View) {
                 shopQuestion.visibility = View.VISIBLE
                 shopYes.setOnClickListener {
                     pet.points -= 100
-                    pet.look.petType = "cat"
                     pet.hungerLvl = 0
+                    db.updatePet(pet)
                     Handler().postDelayed({
+                        pet.look.petType = "cat"
                         activatePet()
                         mainLoop()
                     }, 1000)
@@ -242,9 +338,10 @@ class BaseFragmentLogic(val rootView: View) {
                 shopQuestion.visibility = View.VISIBLE
                 shopYes.setOnClickListener {
                     pet.points -= 300
-                    pet.look.petType = "fish"
                     pet.hungerLvl = 0
+                    db.updatePet(pet)
                     Handler().postDelayed({
+                        pet.look.petType = "fish"
                         activatePet()
                         mainLoop()
                     }, 1000)
@@ -270,9 +367,10 @@ class BaseFragmentLogic(val rootView: View) {
                 shopQuestion.visibility = View.VISIBLE
                 shopYes.setOnClickListener {
                     pet.points -= 1000
-                    pet.look.petType = "frog"
                     pet.hungerLvl = 0
+                    db.updatePet(pet)
                     Handler().postDelayed({
+                        pet.look.petType = "frog"
                         activatePet()
                         mainLoop()
                     }, 1000)
@@ -297,9 +395,10 @@ class BaseFragmentLogic(val rootView: View) {
                 shopQuestion.visibility = View.VISIBLE
                 shopYes.setOnClickListener {
                     pet.points -= 5000
-                    pet.look.petType = "mouse"
                     pet.hungerLvl = 0
+                    db.updatePet(pet)
                     Handler().postDelayed({
+                        pet.look.petType = "mouse"
                         activatePet()
                         mainLoop()
                     }, 1000)
@@ -324,9 +423,10 @@ class BaseFragmentLogic(val rootView: View) {
                 shopQuestion.visibility = View.VISIBLE
                 shopYes.setOnClickListener {
                     pet.points -= 20000
-                    pet.look.petType = "rabbit"
                     pet.hungerLvl = 0
+                    db.updatePet(pet)
                     Handler().postDelayed({
+                        pet.look.petType = "rabbit"
                         activatePet()
                         mainLoop()
                     }, 1000)
@@ -351,9 +451,10 @@ class BaseFragmentLogic(val rootView: View) {
                 shopQuestion.visibility = View.VISIBLE
                 shopYes.setOnClickListener {
                     pet.points -= 50000
-                    pet.look.petType = "panda"
                     pet.hungerLvl = 0
+                    db.updatePet(pet)
                     Handler().postDelayed({
+                        pet.look.petType = "panda"
                         activatePet()
                         mainLoop()
                     }, 1000)
@@ -378,9 +479,10 @@ class BaseFragmentLogic(val rootView: View) {
                 shopQuestion.visibility = View.VISIBLE
                 shopYes.setOnClickListener {
                     pet.points -= 100000
-                    pet.look.petType = "penguin"
                     pet.hungerLvl = 0
+                    db.updatePet(pet)
                     Handler().postDelayed({
+                        pet.look.petType = "penguin"
                         activatePet()
                         mainLoop()
                     }, 1000)
@@ -407,13 +509,14 @@ class BaseFragmentLogic(val rootView: View) {
         pet.funLvl = 100
         pet.maxFunLvl = 100
         pet.age = 0
-        pet.isAlive = true
-        pet.foodAmount = 10
+        pet.isAlive = 1
+        pet.foodAmount = 5
         pet.funAmount = 10
         pet.upgradePrices.hungerAmount = 100
         pet.upgradePrices.hungerMaxAmount = 150
         pet.upgradePrices.funAmount = 70
         pet.upgradePrices.funMaxAmount = 120
+        db.updatePet(pet)
     }
 
     private fun initViews() {
@@ -452,31 +555,6 @@ class BaseFragmentLogic(val rootView: View) {
         shopQuestion = rootView.findViewById(R.id.shop_question)
         shopYes = rootView.findViewById(R.id.shop_button_yes)
         shopNo = rootView.findViewById(R.id.shop_button_no)
-    }
-
-    private fun initPet() {
-        pet = Pet(
-            100,
-            100,
-            100,
-            100,
-            Look(
-                "dog",
-                1,
-                1
-            ),
-            900000,
-            0,
-            true,
-            5,
-            10,
-            UpgradePrices(
-                100,
-                150,
-                70,
-                120
-            )
-        )
     }
 
     private fun initSoundPool() {
@@ -610,13 +688,15 @@ class BaseFragmentLogic(val rootView: View) {
                         }
                         isReady = 0
                         pet.age++
+                        updateDate()
                     }
                     isReady++
                     position++
+                    db.updatePet(pet)
                     if (!checkIfDead()) {
                         threadHandler.postDelayed(this, 500)
                     } else {
-                        pet.isAlive = false
+                        pet.isAlive = 0
                         (rootView.context as MainActivity).runOnUiThread {
                             image.setImageDrawable(rootView.context.getDrawable(R.drawable.death))
                         }
@@ -625,6 +705,17 @@ class BaseFragmentLogic(val rootView: View) {
                 }
             })
         }, 300)
+    }
+
+    private fun updateDate() {
+        var currentDate = Calendar.getInstance()
+        date.year = currentDate.get(Calendar.YEAR)
+        date.month = currentDate.get(Calendar.MONTH)
+        date.day = currentDate.get(Calendar.DAY_OF_MONTH)
+        date.hour = currentDate.get(Calendar.HOUR_OF_DAY)
+        date.minute = currentDate.get(Calendar.MINUTE)
+        date.second = currentDate.get(Calendar.SECOND)
+        db.updateDate(date)
     }
 
     private fun initIcons(activity: Activity) {

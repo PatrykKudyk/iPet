@@ -323,7 +323,7 @@
                             android:layout_weight="2"
                             android:fontFamily="@font/dustismo_bold"
                             android:gravity="center"
-                            android:text="@string/amount"
+                            android:text="@string/max"
                             android:textSize="12dip" />
 
                         <LinearLayout
@@ -483,7 +483,7 @@
                             android:layout_weight="2"
                             android:fontFamily="@font/dustismo_bold"
                             android:gravity="center"
-                            android:text="@string/amount"
+                            android:text="@string/max"
                             android:textSize="12dip" />
 
                         <LinearLayout

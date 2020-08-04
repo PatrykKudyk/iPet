@@ -11,10 +11,7 @@ import com.partos.ipet.MyApp
 import com.partos.ipet.R
 import com.partos.ipet.activities.MainActivity
 import com.partos.ipet.db.DataBaseHelper
-import com.partos.ipet.models.Date
-import com.partos.ipet.models.Look
-import com.partos.ipet.models.Pet
-import com.partos.ipet.models.UpgradePrices
+import com.partos.ipet.models.*
 
 class BaseFragmentLogic(val rootView: View) {
 
@@ -62,11 +59,22 @@ class BaseFragmentLogic(val rootView: View) {
     private lateinit var shopNo: Button
     private lateinit var foodIncome: TextView
     private lateinit var playIncome: TextView
+    private lateinit var ball1: ImageView
+    private lateinit var ball2: ImageView
+    private lateinit var ball3: ImageView
+    private lateinit var ball4: ImageView
+    private lateinit var ball5: ImageView
+    private lateinit var ball6: ImageView
+    private lateinit var ball7: ImageView
+    private lateinit var ball8: ImageView
+    private lateinit var ball9: ImageView
+    private lateinit var ball10: ImageView
 
 
     fun initFragment() {
         db = DataBaseHelper(rootView.context)
         initViews()
+        initBallsArray()
         initListeners()
         getPet()
         getDate()
@@ -74,6 +82,20 @@ class BaseFragmentLogic(val rootView: View) {
         Handler().postDelayed({
             mainLoop()
         }, 300)
+    }
+
+    private fun initBallsArray() {
+        MyApp.balls = ArrayList()
+        MyApp.balls.add(Ball(false, ball1))
+        MyApp.balls.add(Ball(false, ball2))
+        MyApp.balls.add(Ball(false, ball3))
+        MyApp.balls.add(Ball(false, ball4))
+        MyApp.balls.add(Ball(false, ball5))
+        MyApp.balls.add(Ball(false, ball6))
+        MyApp.balls.add(Ball(false, ball7))
+        MyApp.balls.add(Ball(false, ball8))
+        MyApp.balls.add(Ball(false, ball9))
+        MyApp.balls.add(Ball(false, ball10))
     }
 
     private fun checkDateDiff() {
@@ -177,6 +199,7 @@ class BaseFragmentLogic(val rootView: View) {
         playButton.setOnClickListener {
             if (MyApp.pet.isAlive == 1) {
                 PetHelper().handleFunButton()
+                AnimationsHelper().animateBall(rootView.context)
                 db.updatePet(MyApp.pet)
                 showProgress()
                 moneyText.text = FormatsHelper().formatMoney(MyApp.pet.points)
@@ -489,6 +512,7 @@ class BaseFragmentLogic(val rootView: View) {
         }
     }
 
+
     private fun showNoMoneyToast() {
         Toast.makeText(
             rootView.context,
@@ -547,6 +571,16 @@ class BaseFragmentLogic(val rootView: View) {
         upgradePlayIncomeCost = rootView.findViewById(R.id.upgrade_play_income_cost)
         foodIncome = rootView.findViewById(R.id.text_food_income)
         playIncome = rootView.findViewById(R.id.text_play_income)
+        ball1 = rootView.findViewById(R.id.ball_image_1)
+        ball2 = rootView.findViewById(R.id.ball_image_2)
+        ball3 = rootView.findViewById(R.id.ball_image_3)
+        ball4 = rootView.findViewById(R.id.ball_image_4)
+        ball5 = rootView.findViewById(R.id.ball_image_5)
+        ball6 = rootView.findViewById(R.id.ball_image_6)
+        ball7 = rootView.findViewById(R.id.ball_image_7)
+        ball8 = rootView.findViewById(R.id.ball_image_8)
+        ball9 = rootView.findViewById(R.id.ball_image_9)
+        ball10 = rootView.findViewById(R.id.ball_image_10)
     }
 
     private fun mainLoop() {

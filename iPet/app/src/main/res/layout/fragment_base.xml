@@ -47,7 +47,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="24dp"
-            android:src="@drawable/dog_food"
+            tools:src="@drawable/dog_food"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_money" />
 
@@ -203,139 +203,150 @@
             tools:text="5 sec" />
 
         <LinearLayout
-            app:layout_constraintTop_toBottomOf="@id/text_time"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:orientation="horizontal"
             android:weightSum="100"
-            android:orientation="horizontal">
+            android:layout_marginTop="70dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/upgrades_card">
 
             <ImageView
                 android:id="@+id/ball_image_1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                tools:src="@drawable/ball"
-                android:layout_weight="15"/>
+                android:layout_weight="15"
+                android:visibility="invisible"
+                tools:src="@drawable/ball" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="5"/>
+                android:layout_weight="5" />
 
             <ImageView
                 android:id="@+id/ball_image_2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                tools:src="@drawable/ball"
-                android:layout_weight="15"/>
+                android:layout_weight="15"
+                android:visibility="invisible"
+                tools:src="@drawable/ball" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="5"/>
+                android:layout_weight="5" />
 
             <ImageView
                 android:id="@+id/ball_image_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                tools:src="@drawable/ball"
-                android:layout_weight="15"/>
+                android:layout_weight="15"
+                android:visibility="invisible"
+                tools:src="@drawable/ball" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="5"/>
+                android:layout_weight="5" />
 
             <ImageView
                 android:id="@+id/ball_image_4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                tools:src="@drawable/ball"
-                android:layout_weight="15"/>
+                android:layout_weight="15"
+                android:visibility="invisible"
+                tools:src="@drawable/ball" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="5"/>
+                android:layout_weight="5" />
 
             <ImageView
                 android:id="@+id/ball_image_5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                tools:src="@drawable/ball"
-                android:layout_weight="15"/>
+                android:layout_weight="15"
+                android:visibility="invisible"
+                tools:src="@drawable/ball" />
 
         </LinearLayout>
 
         <LinearLayout
-            app:layout_constraintTop_toBottomOf="@id/text_time"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="200dp"
             android:layout_marginStart="60dp"
+            android:orientation="horizontal"
             android:weightSum="100"
-            android:orientation="horizontal">
+            android:layout_marginTop="70dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/upgrades_card">
 
 
             <ImageView
                 android:id="@+id/ball_image_6"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                tools:src="@drawable/ball"
-                android:layout_weight="15"/>
+                android:layout_weight="15"
+                android:visibility="invisible"
+                tools:src="@drawable/ball" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="5"/>
+                android:layout_weight="5" />
 
             <ImageView
                 android:id="@+id/ball_image_7"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                tools:src="@drawable/ball"
-                android:layout_weight="15"/>
+                android:layout_weight="15"
+                android:visibility="invisible"
+                tools:src="@drawable/ball" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="5"/>
+                android:layout_weight="5" />
 
             <ImageView
                 android:id="@+id/ball_image_8"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                tools:src="@drawable/ball"
-                android:layout_weight="15"/>
+                android:layout_weight="15"
+                android:visibility="invisible"
+                tools:src="@drawable/ball" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="5"/>
+                android:layout_weight="5" />
 
             <ImageView
                 android:id="@+id/ball_image_9"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                tools:src="@drawable/ball"
-                android:layout_weight="15"/>
+                android:layout_weight="15"
+                android:visibility="invisible"
+                tools:src="@drawable/ball" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="5"/>
+                android:layout_weight="5" />
 
             <ImageView
                 android:id="@+id/ball_image_10"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                tools:src="@drawable/ball"
-                android:layout_weight="15"/>
-
+                android:layout_weight="15"
+                android:visibility="invisible"
+                tools:src="@drawable/ball" />
 
 
         </LinearLayout>

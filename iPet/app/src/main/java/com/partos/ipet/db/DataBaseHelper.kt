@@ -223,6 +223,7 @@ class DataBaseHelper(context: Context) :
             TableInfo.TABLE_NAME_PET, values, BaseColumns._ID + "=?",
             arrayOf(pet.id.toString())
         )
+        db.close()
     }
 
     fun deletePet(petId: Long): Boolean {

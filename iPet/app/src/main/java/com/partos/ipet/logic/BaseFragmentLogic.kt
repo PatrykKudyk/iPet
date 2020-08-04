@@ -1,8 +1,6 @@
 package com.partos.ipet.logic
 
 import android.app.Activity
-import android.icu.util.Calendar
-import android.media.AudioAttributes
 import android.media.SoundPool
 import android.os.Handler
 import android.view.View
@@ -155,12 +153,18 @@ class BaseFragmentLogic(val rootView: View) {
             }
             if (upgradesCard.visibility == View.GONE) {
                 upgradesCard.visibility = View.VISIBLE
-                upgradeFoodCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.hungerAmount)
-                upgradeFoodMaxCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.hungerMaxAmount)
-                upgradePlayCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.funAmount)
-                upgradePlayMaxCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.funMaxAmount)
-                upgradeFoodIncomeCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.hungerIncome)
-                upgradePlayIncomeCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.funIncome)
+                upgradeFoodCost.text =
+                    FormatsHelper().formatMoney(MyApp.pet.upgradePrices.hungerAmount)
+                upgradeFoodMaxCost.text =
+                    FormatsHelper().formatMoney(MyApp.pet.upgradePrices.hungerMaxAmount)
+                upgradePlayCost.text =
+                    FormatsHelper().formatMoney(MyApp.pet.upgradePrices.funAmount)
+                upgradePlayMaxCost.text =
+                    FormatsHelper().formatMoney(MyApp.pet.upgradePrices.funMaxAmount)
+                upgradeFoodIncomeCost.text =
+                    FormatsHelper().formatMoney(MyApp.pet.upgradePrices.hungerIncome)
+                upgradePlayIncomeCost.text =
+                    FormatsHelper().formatMoney(MyApp.pet.upgradePrices.funIncome)
             } else {
                 upgradesCard.visibility = View.GONE
             }
@@ -173,7 +177,8 @@ class BaseFragmentLogic(val rootView: View) {
                     (MyApp.pet.upgradePrices.hungerAmount * 1.1).toLong()
                 MyApp.pet.foodAmount = ((MyApp.pet.foodAmount * 1.1) + 1).toInt()
                 moneyText.text = FormatsHelper().formatMoney(MyApp.pet.points)
-                upgradeFoodCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.hungerAmount)
+                upgradeFoodCost.text =
+                    FormatsHelper().formatMoney(MyApp.pet.upgradePrices.hungerAmount)
                 foodText.text = MyApp.pet.foodAmount.toString()
                 db.updatePet(MyApp.pet)
             } else {
@@ -191,7 +196,8 @@ class BaseFragmentLogic(val rootView: View) {
                     (MyApp.pet.upgradePrices.hungerMaxAmount * 1.1).toLong()
                 MyApp.pet.maxHungerLvl = ((MyApp.pet.maxHungerLvl * 1.1) + 1).toInt()
                 moneyText.text = FormatsHelper().formatMoney(MyApp.pet.points)
-                upgradeFoodMaxCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.hungerMaxAmount)
+                upgradeFoodMaxCost.text =
+                    FormatsHelper().formatMoney(MyApp.pet.upgradePrices.hungerMaxAmount)
                 hungerProgress.max = MyApp.pet.maxHungerLvl
                 db.updatePet(MyApp.pet)
                 showProgress()
@@ -210,7 +216,8 @@ class BaseFragmentLogic(val rootView: View) {
                     (MyApp.pet.upgradePrices.funAmount * 1.1).toLong()
                 MyApp.pet.funAmount = ((MyApp.pet.funAmount * 1.1) + 1).toInt()
                 moneyText.text = FormatsHelper().formatMoney(MyApp.pet.points)
-                upgradePlayCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.funAmount)
+                upgradePlayCost.text =
+                    FormatsHelper().formatMoney(MyApp.pet.upgradePrices.funAmount)
                 playText.text = MyApp.pet.funAmount.toString()
                 db.updatePet(MyApp.pet)
             } else {
@@ -228,7 +235,8 @@ class BaseFragmentLogic(val rootView: View) {
                     (MyApp.pet.upgradePrices.funMaxAmount * 1.1).toLong()
                 MyApp.pet.maxFunLvl = ((MyApp.pet.maxFunLvl * 1.1) + 1).toInt()
                 moneyText.text = FormatsHelper().formatMoney(MyApp.pet.points)
-                upgradePlayMaxCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.funMaxAmount)
+                upgradePlayMaxCost.text =
+                    FormatsHelper().formatMoney(MyApp.pet.upgradePrices.funMaxAmount)
                 funProgress.max = MyApp.pet.maxFunLvl
                 db.updatePet(MyApp.pet)
                 showProgress()
@@ -247,7 +255,8 @@ class BaseFragmentLogic(val rootView: View) {
                     (MyApp.pet.upgradePrices.hungerIncome * 1.4).toLong()
                 MyApp.pet.foodIncome += 1
                 moneyText.text = FormatsHelper().formatMoney(MyApp.pet.points)
-                upgradeFoodIncomeCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.hungerIncome)
+                upgradeFoodIncomeCost.text =
+                    FormatsHelper().formatMoney(MyApp.pet.upgradePrices.hungerIncome)
                 foodIncome.text = MyApp.pet.foodIncome.toString()
                 db.updatePet(MyApp.pet)
             } else {
@@ -266,7 +275,8 @@ class BaseFragmentLogic(val rootView: View) {
                     (MyApp.pet.upgradePrices.funIncome * 1.4).toLong()
                 MyApp.pet.funIncome += 1
                 moneyText.text = FormatsHelper().formatMoney(MyApp.pet.points)
-                upgradePlayIncomeCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.funIncome)
+                upgradePlayIncomeCost.text =
+                    FormatsHelper().formatMoney(MyApp.pet.upgradePrices.funIncome)
                 playIncome.text = MyApp.pet.funIncome.toString()
                 db.updatePet(MyApp.pet)
             } else {
@@ -578,94 +588,13 @@ class BaseFragmentLogic(val rootView: View) {
             showProgress()
             threadHandler.post(object : Runnable {
                 override fun run() {
-                    when (position) {
-                        0, 2, 4 -> {
-                            when (MyApp.pet.look.petType) {
-                                "dog" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.dog_normal))
-                                }
-                                "cat" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.cat_normal))
-                                }
-                                "fish" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.fish_normal))
-                                }
-                                "frog" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.frog_normal))
-                                }
-                                "mouse" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.mouse_normal))
-                                }
-                                "rabbit" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.rabbit_normal))
-                                }
-                                "panda" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.panda_normal))
-                                }
-                                "penguin" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.penguin_normal))
-                                }
-                            }
-                        }
-                        1, 3 -> {
-                            when (MyApp.pet.look.petType) {
-                                "dog" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.dog_normal_2))
-                                }
-                                "cat" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.cat_normal_2))
-                                }
-                                "fish" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.fish_normal_2))
-                                }
-                                "frog" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.frog_normal_2))
-                                }
-                                "mouse" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.mouse_normal_2))
-                                }
-                                "rabbit" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.rabbit_normal_2))
-                                }
-                                "panda" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.panda_normal_2))
-                                }
-                                "penguin" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.penguin_normal_2))
-                                }
-                            }
-                        }
-                        5 -> {
-                            when (MyApp.pet.look.petType) {
-                                "dog" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.dog_normal_2))
-                                }
-                                "cat" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.cat_normal_2))
-                                }
-                                "fish" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.fish_normal_2))
-                                }
-                                "frog" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.frog_normal_2))
-                                }
-                                "mouse" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.mouse_normal_2))
-                                }
-                                "rabbit" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.rabbit_normal_2))
-                                }
-                                "panda" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.panda_normal_2))
-                                }
-                                "penguin" -> activity.runOnUiThread {
-                                    image.setImageDrawable(rootView.context.getDrawable(R.drawable.penguin_normal_2))
-                                }
-                            }
-                            position = -1
-                        }
-                    }
                     if (isReady == 2) {
+                        PetIconsHelper().setNormalIcon(
+                            image,
+                            rootView.context,
+                            activity,
+                            MyApp.pet.look.petType
+                        )
                         MyApp.pet.hungerLvl -= 1
                         MyApp.pet.funLvl -= 2
                         if (MyApp.pet.funLvl < 0) {
@@ -681,6 +610,13 @@ class BaseFragmentLogic(val rootView: View) {
                         isReady = 0
                         MyApp.pet.age++
                         updateDate()
+                    } else {
+                        PetIconsHelper().setNormalSecondIcon(
+                            image,
+                            rootView.context,
+                            activity,
+                            MyApp.pet.look.petType
+                        )
                     }
                     isReady++
                     position++
@@ -705,32 +641,7 @@ class BaseFragmentLogic(val rootView: View) {
     }
 
     private fun initIcons(activity: Activity) {
-        when (MyApp.pet.look.petType) {
-            "dog" -> activity.runOnUiThread {
-                foodButton.setImageDrawable(rootView.context.getDrawable(R.drawable.dog_food))
-            }
-            "cat" -> activity.runOnUiThread {
-                foodButton.setImageDrawable(rootView.context.getDrawable(R.drawable.cat_food))
-            }
-            "fish" -> activity.runOnUiThread {
-                foodButton.setImageDrawable(rootView.context.getDrawable(R.drawable.fish_food))
-            }
-            "frog" -> activity.runOnUiThread {
-                foodButton.setImageDrawable(rootView.context.getDrawable(R.drawable.bug))
-            }
-            "mouse" -> activity.runOnUiThread {
-                foodButton.setImageDrawable(rootView.context.getDrawable(R.drawable.cheese))
-            }
-            "rabbit" -> activity.runOnUiThread {
-                foodButton.setImageDrawable(rootView.context.getDrawable(R.drawable.carrot))
-            }
-            "panda" -> activity.runOnUiThread {
-                foodButton.setImageDrawable(rootView.context.getDrawable(R.drawable.bamboo))
-            }
-            "penguin" -> activity.runOnUiThread {
-                foodButton.setImageDrawable(rootView.context.getDrawable(R.drawable.fish))
-            }
-        }
+        PetIconsHelper().setFoodIcon(foodButton, rootView.context, activity, MyApp.pet.look.petType)
     }
 
     private fun showAge() {
@@ -748,8 +659,9 @@ class BaseFragmentLogic(val rootView: View) {
         hungerText.text =
             rootView.context.getString(R.string.hunger) + " " + MyApp.pet.hungerLvl.toString() +
                     "/" + MyApp.pet.maxHungerLvl.toString()
-        funText.text = rootView.context.getString(R.string.`fun`) + " " + MyApp.pet.funLvl.toString() +
-                "/" + MyApp.pet.maxFunLvl.toString()
+        funText.text =
+            rootView.context.getString(R.string.`fun`) + " " + MyApp.pet.funLvl.toString() +
+                    "/" + MyApp.pet.maxFunLvl.toString()
         hungerProgress.max = MyApp.pet.maxHungerLvl
         hungerProgress.progress = MyApp.pet.hungerLvl
         funProgress.max = MyApp.pet.maxFunLvl

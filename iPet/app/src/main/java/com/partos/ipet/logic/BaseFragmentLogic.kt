@@ -14,14 +14,12 @@ import com.partos.ipet.R
 import com.partos.ipet.activities.MainActivity
 import com.partos.ipet.db.DataBaseHelper
 import com.partos.ipet.models.Date
-import com.partos.ipet.models.Pet
 
 class BaseFragmentLogic(val rootView: View) {
 
 
     private lateinit var image: ImageView
     private lateinit var soundPool: SoundPool
-    private var soundBark = 0
     private lateinit var date: Date
     private lateinit var db: DataBaseHelper
     private lateinit var foodButton: ImageView
@@ -69,7 +67,6 @@ class BaseFragmentLogic(val rootView: View) {
     fun initFragment() {
         db = DataBaseHelper(rootView.context)
         initViews()
-        initSoundPool()
         initListeners()
         image = rootView.findViewById(R.id.dog_image)
         getPet()
@@ -81,16 +78,7 @@ class BaseFragmentLogic(val rootView: View) {
     }
 
     private fun checkDateDiff() {
-        val nowCalendar = Calendar.getInstance()
-        val now = Date(
-            0,
-            nowCalendar.get(Calendar.YEAR),
-            nowCalendar.get(Calendar.MONTH),
-            nowCalendar.get(Calendar.DAY_OF_MONTH),
-            nowCalendar.get(Calendar.HOUR_OF_DAY),
-            nowCalendar.get(Calendar.MINUTE),
-            nowCalendar.get(Calendar.SECOND)
-        )
+        val now = DateHelper().getNowDate()
         val then = db.getDate()[0]
         val diff = DateHelper().getDiffInSeconds(then, now)
         MyApp.pet.hungerLvl -= diff.toInt()
@@ -109,16 +97,7 @@ class BaseFragmentLogic(val rootView: View) {
     }
 
     private fun getDate() {
-        val today = Calendar.getInstance()
-        date = Date(
-            0,
-            today.get(Calendar.YEAR),
-            today.get(Calendar.MONTH),
-            today.get(Calendar.DAY_OF_MONTH),
-            today.get(Calendar.HOUR_OF_DAY),
-            today.get(Calendar.MINUTE),
-            today.get(Calendar.SECOND)
-        )
+        date = DateHelper().getNowDate()
         val someDate = db.getDate()
         if (someDate.size == 0) {
             db.addDate(date)
@@ -581,19 +560,6 @@ class BaseFragmentLogic(val rootView: View) {
         playIncome = rootView.findViewById(R.id.text_play_income)
     }
 
-    private fun initSoundPool() {
-        val audioAttributes = AudioAttributes.Builder()
-            .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
-            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-            .build()
-        soundPool = SoundPool.Builder()
-            .setMaxStreams(2)
-            .setAudioAttributes(audioAttributes)
-            .build()
-
-        soundBark = soundPool.load(rootView.context, R.raw.bark, 1)
-    }
-
     private fun mainLoop() {
         var looperThread = TimerThread()
         looperThread.start()
@@ -734,13 +700,7 @@ class BaseFragmentLogic(val rootView: View) {
     }
 
     private fun updateDate() {
-        var currentDate = Calendar.getInstance()
-        date.year = currentDate.get(Calendar.YEAR)
-        date.month = currentDate.get(Calendar.MONTH)
-        date.day = currentDate.get(Calendar.DAY_OF_MONTH)
-        date.hour = currentDate.get(Calendar.HOUR_OF_DAY)
-        date.minute = currentDate.get(Calendar.MINUTE)
-        date.second = currentDate.get(Calendar.SECOND)
+        date = DateHelper().getNowDate()
         db.updateDate(date)
     }
 

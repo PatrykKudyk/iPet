@@ -1,8 +1,22 @@
 package com.partos.ipet.logic
 
+import android.icu.util.Calendar
 import com.partos.ipet.models.Date
 
 class DateHelper() {
+
+    fun getNowDate() : Date {
+        val today = Calendar.getInstance()
+        return Date(
+            0,
+            today.get(Calendar.YEAR),
+            today.get(Calendar.MONTH),
+            today.get(Calendar.DAY_OF_MONTH),
+            today.get(Calendar.HOUR_OF_DAY),
+            today.get(Calendar.MINUTE),
+            today.get(Calendar.SECOND)
+        )
+    }
 
     fun getDiffInSeconds(then: Date, now: Date): Long {
         var diff = 0L

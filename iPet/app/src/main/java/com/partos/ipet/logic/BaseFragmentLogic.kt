@@ -47,6 +47,10 @@ class BaseFragmentLogic(val rootView: View) {
     private lateinit var upgradeFoodMaxCost: TextView
     private lateinit var upgradePlayCost: TextView
     private lateinit var upgradePlayMaxCost: TextView
+    private lateinit var upgradeFoodIncome: CardView
+    private lateinit var upgradeFoodIncomeCost: TextView
+    private lateinit var upgradePlayIncome: CardView
+    private lateinit var upgradePlayIncomeCost: TextView
     private lateinit var shopCard: CardView
     private lateinit var shopCard1: CardView
     private lateinit var shopCard2: CardView
@@ -60,6 +64,8 @@ class BaseFragmentLogic(val rootView: View) {
     private lateinit var shopQuestion: ConstraintLayout
     private lateinit var shopYes: Button
     private lateinit var shopNo: Button
+    private lateinit var foodIncome: TextView
+    private lateinit var playIncome: TextView
 
 
     fun initFragment() {
@@ -90,14 +96,14 @@ class BaseFragmentLogic(val rootView: View) {
         val then = db.getDate()[0]
         val diff = DateHelper().getDiffInSeconds(then, now)
         pet.hungerLvl -= diff.toInt()
-        if (pet.hungerLvl < 0){
+        if (pet.hungerLvl < 0) {
             pet.hungerLvl = 0
         }
         pet.funLvl -= diff.toInt() * 2
-        if (pet.funLvl < 0){
+        if (pet.funLvl < 0) {
             pet.funLvl = 0
         }
-        if(pet.hungerLvl != 0) {
+        if (pet.hungerLvl != 0) {
             pet.age += diff
         }
         showProgress()
@@ -136,16 +142,20 @@ class BaseFragmentLogic(val rootView: View) {
                 1,
                 1
             ),
-            0,
+            100000,
             0,
             1,
             5,
             10,
+            1,
+            2,
             UpgradePrices(
                 100,
                 150,
                 70,
-                120
+                120,
+                500,
+                500
             )
         )
         var somePet = db.getPets()
@@ -160,9 +170,9 @@ class BaseFragmentLogic(val rootView: View) {
         foodButton.setOnClickListener {
             if (pet.isAlive == 1) {
                 if (pet.maxHungerLvl - pet.hungerLvl >= pet.foodAmount) {
-                    pet.points += pet.foodAmount
+                    pet.points += pet.foodAmount * pet.foodIncome
                 } else {
-                    pet.points += pet.maxHungerLvl - pet.hungerLvl
+                    pet.points += (pet.maxHungerLvl - pet.hungerLvl) * pet.foodIncome
                 }
                 pet.hungerLvl += pet.foodAmount
                 if (pet.hungerLvl > pet.maxHungerLvl) {
@@ -176,9 +186,9 @@ class BaseFragmentLogic(val rootView: View) {
         playButton.setOnClickListener {
             if (pet.isAlive == 1) {
                 if (pet.maxFunLvl - pet.funLvl >= pet.funAmount) {
-                    pet.points += pet.funAmount * 2
+                    pet.points += pet.funAmount * pet.funIncome
                 } else {
-                    pet.points += (pet.maxFunLvl - pet.funLvl) * 2
+                    pet.points += (pet.maxFunLvl - pet.funLvl) * pet.funIncome
                 }
                 pet.funLvl += pet.funAmount
                 if (pet.funLvl > pet.maxFunLvl) {
@@ -199,6 +209,8 @@ class BaseFragmentLogic(val rootView: View) {
                 upgradeFoodMaxCost.text = formatMoney(pet.upgradePrices.hungerMaxAmount)
                 upgradePlayCost.text = formatMoney(pet.upgradePrices.funAmount)
                 upgradePlayMaxCost.text = formatMoney(pet.upgradePrices.funMaxAmount)
+                upgradeFoodIncomeCost.text = formatMoney(pet.upgradePrices.hungerIncome)
+                upgradePlayIncomeCost.text = formatMoney(pet.upgradePrices.funIncome)
             } else {
                 upgradesCard.visibility = View.GONE
             }
@@ -270,6 +282,43 @@ class BaseFragmentLogic(val rootView: View) {
                 funProgress.max = pet.maxFunLvl
                 db.updatePet(pet)
                 showProgress()
+            } else {
+                Toast.makeText(
+                    rootView.context,
+                    rootView.context.getString(R.string.toast_not_enough_money),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        upgradeFoodIncome.setOnClickListener {
+            if (pet.points >= pet.upgradePrices.hungerIncome) {
+                pet.points -= pet.upgradePrices.hungerIncome
+                pet.upgradePrices.hungerIncome =
+                    (pet.upgradePrices.hungerIncome * 1.4).toLong()
+                pet.foodIncome += 1
+                moneyText.text = formatMoney(pet.points)
+                upgradeFoodIncomeCost.text = formatMoney(pet.upgradePrices.hungerIncome)
+                foodIncome.text = pet.foodIncome.toString()
+                db.updatePet(pet)
+            } else {
+                Toast.makeText(
+                    rootView.context,
+                    rootView.context.getString(R.string.toast_not_enough_money),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
+        upgradePlayIncome.setOnClickListener {
+            if (pet.points >= pet.upgradePrices.funIncome) {
+                pet.points -= pet.upgradePrices.funIncome
+                pet.upgradePrices.funIncome =
+                    (pet.upgradePrices.funIncome * 1.4).toLong()
+                pet.funIncome += 1
+                moneyText.text = formatMoney(pet.points)
+                upgradePlayIncomeCost.text = formatMoney(pet.upgradePrices.funIncome)
+                playIncome.text = pet.funIncome.toString()
+                db.updatePet(pet)
             } else {
                 Toast.makeText(
                     rootView.context,
@@ -511,17 +560,9 @@ class BaseFragmentLogic(val rootView: View) {
 
     private fun activatePet() {
         pet.hungerLvl = 100
-        pet.maxHungerLvl = 100
         pet.funLvl = 100
-        pet.maxFunLvl = 100
         pet.age = 0
         pet.isAlive = 1
-        pet.foodAmount = 5
-        pet.funAmount = 10
-        pet.upgradePrices.hungerAmount = 100
-        pet.upgradePrices.hungerMaxAmount = 150
-        pet.upgradePrices.funAmount = 70
-        pet.upgradePrices.funMaxAmount = 120
         db.updatePet(pet)
     }
 
@@ -561,6 +602,12 @@ class BaseFragmentLogic(val rootView: View) {
         shopQuestion = rootView.findViewById(R.id.shop_question)
         shopYes = rootView.findViewById(R.id.shop_button_yes)
         shopNo = rootView.findViewById(R.id.shop_button_no)
+        upgradeFoodIncome = rootView.findViewById(R.id.upgrade_food_income)
+        upgradeFoodIncomeCost = rootView.findViewById(R.id.upgrade_food_income_cost)
+        upgradePlayIncome = rootView.findViewById(R.id.upgrade_play_income)
+        upgradePlayIncomeCost = rootView.findViewById(R.id.upgrade_play_income_cost)
+        foodIncome = rootView.findViewById(R.id.text_food_income)
+        playIncome = rootView.findViewById(R.id.text_play_income)
     }
 
     private fun initSoundPool() {
@@ -586,6 +633,8 @@ class BaseFragmentLogic(val rootView: View) {
             foodText.text = pet.foodAmount.toString()
             playText.text = pet.funAmount.toString()
             moneyText.text = formatMoney(pet.points)
+            foodIncome.text = pet.foodIncome.toString()
+            playIncome.text = pet.funIncome.toString()
             val activity = (rootView.context as MainActivity)
             initIcons(activity)
             showAge()

@@ -26,10 +26,14 @@ object TableInfo : BaseColumns {
     const val TABLE_COLUMN_PET_IS_ALIVE = "isAlive"
     const val TABLE_COLUMN_PET_FOOD_AMOUNT = "foodAmount"
     const val TABLE_COLUMN_PET_FUN_AMOUNT = "funAmount"
+    const val TABLE_COLUMN_PET_FOOD_INCOME = "foodIncome"
+    const val TABLE_COLUMN_PET_FUN_INCOME = "funIncome"
     const val TABLE_COLUMN_PET_UPGRADES_HUNGER_AMOUNT = "upgradesHungerAmount"
     const val TABLE_COLUMN_PET_UPGRADES_HUNGER_AMOUNT_MAX = "upgradesHungerAmountMax"
     const val TABLE_COLUMN_PET_UPGRADES_FUN_AMOUNT = "upgradesFunAmount"
     const val TABLE_COLUMN_PET_UPGRADES_FUN_AMOUNT_MAX = "upgradesFunAmountMax"
+    const val TABLE_COLUMN_PET_UPGRADES_FUN_INCOME = "upgradesFunIncome"
+    const val TABLE_COLUMN_PET_UPGRADES_HUNGER_INCOME = "upgradesHungerIncome"
     const val TABLE_NAME_DATE = "date"
     const val TABLE_COLUMN_DATE_YEAR = "year"
     const val TABLE_COLUMN_DATE_MONTH = "month"
@@ -57,10 +61,14 @@ object BasicCommand {
                 "${TableInfo.TABLE_COLUMN_PET_IS_ALIVE} INTEGER NOT NULL," +
                 "${TableInfo.TABLE_COLUMN_PET_FOOD_AMOUNT} INTEGER NOT NULL," +
                 "${TableInfo.TABLE_COLUMN_PET_FUN_AMOUNT} INTEGER NOT NULL," +
+                "${TableInfo.TABLE_COLUMN_PET_FOOD_INCOME} INTEGER NOT NULL," +
+                "${TableInfo.TABLE_COLUMN_PET_FUN_INCOME} INTEGER NOT NULL," +
                 "${TableInfo.TABLE_COLUMN_PET_UPGRADES_HUNGER_AMOUNT} INTEGER NOT NULL," +
                 "${TableInfo.TABLE_COLUMN_PET_UPGRADES_HUNGER_AMOUNT_MAX} INTEGER NOT NULL," +
                 "${TableInfo.TABLE_COLUMN_PET_UPGRADES_FUN_AMOUNT} INTEGER NOT NULL," +
-                "${TableInfo.TABLE_COLUMN_PET_UPGRADES_FUN_AMOUNT_MAX} INTEGER NOT NULL)"
+                "${TableInfo.TABLE_COLUMN_PET_UPGRADES_FUN_AMOUNT_MAX} INTEGER NOT NULL," +
+                "${TableInfo.TABLE_COLUMN_PET_UPGRADES_FUN_INCOME} INTEGER NOT NULL," +
+                "${TableInfo.TABLE_COLUMN_PET_UPGRADES_HUNGER_INCOME} INTEGER NOT NULL)"
 
     const val SQL_CREATE_TABLE_DATE =
         "CREATE TABLE ${TableInfo.TABLE_NAME_DATE} (" +
@@ -97,7 +105,7 @@ class DataBaseHelper(context: Context) :
         if (result.moveToFirst()) {
             do {
                 var myPet = Pet(
-                    result.getInt(result.getColumnIndex(BaseColumns._ID)).toLong(),
+                    result.getLong(result.getColumnIndex(BaseColumns._ID)),
                     result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_HUNGER_LVL)),
                     result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_HUNGER_LVL_MAX)),
                     result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_FUN_LVL)),
@@ -107,21 +115,20 @@ class DataBaseHelper(context: Context) :
                         result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_LOOK_COLOR)),
                         result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_LOOK_COLLAR))
                     ),
-                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_POINTS))
-                        .toLong(),
-                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_AGE)).toLong(),
+                    result.getLong(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_POINTS)),
+                    result.getLong(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_AGE)),
                     result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_IS_ALIVE)),
                     result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_FOOD_AMOUNT)),
                     result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_FUN_AMOUNT)),
+                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_FOOD_INCOME)),
+                    result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_FUN_INCOME)),
                     UpgradePrices(
-                        result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_UPGRADES_HUNGER_AMOUNT))
-                            .toLong(),
-                        result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_UPGRADES_HUNGER_AMOUNT_MAX))
-                            .toLong(),
-                        result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_UPGRADES_FUN_AMOUNT))
-                            .toLong(),
-                        result.getInt(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_UPGRADES_FUN_AMOUNT_MAX))
-                            .toLong()
+                        result.getLong(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_UPGRADES_HUNGER_AMOUNT)),
+                        result.getLong(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_UPGRADES_HUNGER_AMOUNT_MAX)),
+                        result.getLong(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_UPGRADES_FUN_AMOUNT)),
+                        result.getLong(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_UPGRADES_FUN_AMOUNT_MAX)),
+                        result.getLong(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_UPGRADES_HUNGER_INCOME)),
+                        result.getLong(result.getColumnIndex(TableInfo.TABLE_COLUMN_PET_UPGRADES_FUN_INCOME))
                     )
                 )
                 petList.add(myPet)
@@ -147,6 +154,8 @@ class DataBaseHelper(context: Context) :
         values.put(TableInfo.TABLE_COLUMN_PET_IS_ALIVE, pet.isAlive)
         values.put(TableInfo.TABLE_COLUMN_PET_FOOD_AMOUNT, pet.foodAmount)
         values.put(TableInfo.TABLE_COLUMN_PET_FUN_AMOUNT, pet.funAmount)
+        values.put(TableInfo.TABLE_COLUMN_PET_FOOD_INCOME, pet.foodIncome)
+        values.put(TableInfo.TABLE_COLUMN_PET_FUN_INCOME, pet.funIncome)
         values.put(
             TableInfo.TABLE_COLUMN_PET_UPGRADES_HUNGER_AMOUNT,
             pet.upgradePrices.hungerAmount
@@ -159,6 +168,14 @@ class DataBaseHelper(context: Context) :
         values.put(
             TableInfo.TABLE_COLUMN_PET_UPGRADES_FUN_AMOUNT_MAX,
             pet.upgradePrices.funMaxAmount
+        )
+        values.put(
+            TableInfo.TABLE_COLUMN_PET_UPGRADES_HUNGER_INCOME,
+            pet.upgradePrices.hungerIncome
+        )
+        values.put(
+            TableInfo.TABLE_COLUMN_PET_UPGRADES_FUN_INCOME,
+            pet.upgradePrices.funIncome
         )
         db.insert(TableInfo.TABLE_NAME_PET, null, values)
         db.close()
@@ -179,6 +196,8 @@ class DataBaseHelper(context: Context) :
         values.put(TableInfo.TABLE_COLUMN_PET_IS_ALIVE, pet.isAlive)
         values.put(TableInfo.TABLE_COLUMN_PET_FOOD_AMOUNT, pet.foodAmount)
         values.put(TableInfo.TABLE_COLUMN_PET_FUN_AMOUNT, pet.funAmount)
+        values.put(TableInfo.TABLE_COLUMN_PET_FOOD_INCOME, pet.foodIncome)
+        values.put(TableInfo.TABLE_COLUMN_PET_FUN_INCOME, pet.funIncome)
         values.put(
             TableInfo.TABLE_COLUMN_PET_UPGRADES_HUNGER_AMOUNT,
             pet.upgradePrices.hungerAmount
@@ -191,6 +210,14 @@ class DataBaseHelper(context: Context) :
         values.put(
             TableInfo.TABLE_COLUMN_PET_UPGRADES_FUN_AMOUNT_MAX,
             pet.upgradePrices.funMaxAmount
+        )
+        values.put(
+            TableInfo.TABLE_COLUMN_PET_UPGRADES_HUNGER_INCOME,
+            pet.upgradePrices.hungerIncome
+        )
+        values.put(
+            TableInfo.TABLE_COLUMN_PET_UPGRADES_FUN_INCOME,
+            pet.upgradePrices.funIncome
         )
         db.update(
             TableInfo.TABLE_NAME_PET, values, BaseColumns._ID + "=?",

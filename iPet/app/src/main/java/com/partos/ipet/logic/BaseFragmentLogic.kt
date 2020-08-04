@@ -130,7 +130,7 @@ class BaseFragmentLogic(val rootView: View) {
                 }
                 db.updatePet(MyApp.pet)
                 showProgress()
-                moneyText.text = formatMoney(MyApp.pet.points)
+                moneyText.text = FormatsHelper().formatMoney(MyApp.pet.points)
             }
         }
         playButton.setOnClickListener {
@@ -146,7 +146,7 @@ class BaseFragmentLogic(val rootView: View) {
                 }
                 db.updatePet(MyApp.pet)
                 showProgress()
-                moneyText.text = formatMoney(MyApp.pet.points)
+                moneyText.text = FormatsHelper().formatMoney(MyApp.pet.points)
             }
         }
         upgradeButton.setOnClickListener {
@@ -155,12 +155,12 @@ class BaseFragmentLogic(val rootView: View) {
             }
             if (upgradesCard.visibility == View.GONE) {
                 upgradesCard.visibility = View.VISIBLE
-                upgradeFoodCost.text = formatMoney(MyApp.pet.upgradePrices.hungerAmount)
-                upgradeFoodMaxCost.text = formatMoney(MyApp.pet.upgradePrices.hungerMaxAmount)
-                upgradePlayCost.text = formatMoney(MyApp.pet.upgradePrices.funAmount)
-                upgradePlayMaxCost.text = formatMoney(MyApp.pet.upgradePrices.funMaxAmount)
-                upgradeFoodIncomeCost.text = formatMoney(MyApp.pet.upgradePrices.hungerIncome)
-                upgradePlayIncomeCost.text = formatMoney(MyApp.pet.upgradePrices.funIncome)
+                upgradeFoodCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.hungerAmount)
+                upgradeFoodMaxCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.hungerMaxAmount)
+                upgradePlayCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.funAmount)
+                upgradePlayMaxCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.funMaxAmount)
+                upgradeFoodIncomeCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.hungerIncome)
+                upgradePlayIncomeCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.funIncome)
             } else {
                 upgradesCard.visibility = View.GONE
             }
@@ -172,8 +172,8 @@ class BaseFragmentLogic(val rootView: View) {
                 MyApp.pet.upgradePrices.hungerAmount =
                     (MyApp.pet.upgradePrices.hungerAmount * 1.1).toLong()
                 MyApp.pet.foodAmount = ((MyApp.pet.foodAmount * 1.1) + 1).toInt()
-                moneyText.text = formatMoney(MyApp.pet.points)
-                upgradeFoodCost.text = formatMoney(MyApp.pet.upgradePrices.hungerAmount)
+                moneyText.text = FormatsHelper().formatMoney(MyApp.pet.points)
+                upgradeFoodCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.hungerAmount)
                 foodText.text = MyApp.pet.foodAmount.toString()
                 db.updatePet(MyApp.pet)
             } else {
@@ -190,8 +190,8 @@ class BaseFragmentLogic(val rootView: View) {
                 MyApp.pet.upgradePrices.hungerMaxAmount =
                     (MyApp.pet.upgradePrices.hungerMaxAmount * 1.1).toLong()
                 MyApp.pet.maxHungerLvl = ((MyApp.pet.maxHungerLvl * 1.1) + 1).toInt()
-                moneyText.text = formatMoney(MyApp.pet.points)
-                upgradeFoodMaxCost.text = formatMoney(MyApp.pet.upgradePrices.hungerMaxAmount)
+                moneyText.text = FormatsHelper().formatMoney(MyApp.pet.points)
+                upgradeFoodMaxCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.hungerMaxAmount)
                 hungerProgress.max = MyApp.pet.maxHungerLvl
                 db.updatePet(MyApp.pet)
                 showProgress()
@@ -209,8 +209,8 @@ class BaseFragmentLogic(val rootView: View) {
                 MyApp.pet.upgradePrices.funAmount =
                     (MyApp.pet.upgradePrices.funAmount * 1.1).toLong()
                 MyApp.pet.funAmount = ((MyApp.pet.funAmount * 1.1) + 1).toInt()
-                moneyText.text = formatMoney(MyApp.pet.points)
-                upgradePlayCost.text = formatMoney(MyApp.pet.upgradePrices.funAmount)
+                moneyText.text = FormatsHelper().formatMoney(MyApp.pet.points)
+                upgradePlayCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.funAmount)
                 playText.text = MyApp.pet.funAmount.toString()
                 db.updatePet(MyApp.pet)
             } else {
@@ -227,8 +227,8 @@ class BaseFragmentLogic(val rootView: View) {
                 MyApp.pet.upgradePrices.funMaxAmount =
                     (MyApp.pet.upgradePrices.funMaxAmount * 1.1).toLong()
                 MyApp.pet.maxFunLvl = ((MyApp.pet.maxFunLvl * 1.1) + 1).toInt()
-                moneyText.text = formatMoney(MyApp.pet.points)
-                upgradePlayMaxCost.text = formatMoney(MyApp.pet.upgradePrices.funMaxAmount)
+                moneyText.text = FormatsHelper().formatMoney(MyApp.pet.points)
+                upgradePlayMaxCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.funMaxAmount)
                 funProgress.max = MyApp.pet.maxFunLvl
                 db.updatePet(MyApp.pet)
                 showProgress()
@@ -246,8 +246,8 @@ class BaseFragmentLogic(val rootView: View) {
                 MyApp.pet.upgradePrices.hungerIncome =
                     (MyApp.pet.upgradePrices.hungerIncome * 1.4).toLong()
                 MyApp.pet.foodIncome += 1
-                moneyText.text = formatMoney(MyApp.pet.points)
-                upgradeFoodIncomeCost.text = formatMoney(MyApp.pet.upgradePrices.hungerIncome)
+                moneyText.text = FormatsHelper().formatMoney(MyApp.pet.points)
+                upgradeFoodIncomeCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.hungerIncome)
                 foodIncome.text = MyApp.pet.foodIncome.toString()
                 db.updatePet(MyApp.pet)
             } else {
@@ -265,8 +265,8 @@ class BaseFragmentLogic(val rootView: View) {
                 MyApp.pet.upgradePrices.funIncome =
                     (MyApp.pet.upgradePrices.funIncome * 1.4).toLong()
                 MyApp.pet.funIncome += 1
-                moneyText.text = formatMoney(MyApp.pet.points)
-                upgradePlayIncomeCost.text = formatMoney(MyApp.pet.upgradePrices.funIncome)
+                moneyText.text = FormatsHelper().formatMoney(MyApp.pet.points)
+                upgradePlayIncomeCost.text = FormatsHelper().formatMoney(MyApp.pet.upgradePrices.funIncome)
                 playIncome.text = MyApp.pet.funIncome.toString()
                 db.updatePet(MyApp.pet)
             } else {
@@ -569,7 +569,7 @@ class BaseFragmentLogic(val rootView: View) {
             var isReady = 0
             foodText.text = MyApp.pet.foodAmount.toString()
             playText.text = MyApp.pet.funAmount.toString()
-            moneyText.text = formatMoney(MyApp.pet.points)
+            moneyText.text = FormatsHelper().formatMoney(MyApp.pet.points)
             foodIncome.text = MyApp.pet.foodIncome.toString()
             playIncome.text = MyApp.pet.funIncome.toString()
             val activity = (rootView.context as MainActivity)
@@ -734,44 +734,7 @@ class BaseFragmentLogic(val rootView: View) {
     }
 
     private fun showAge() {
-        when (MyApp.pet.age) {
-            in 0..59 -> {
-                ageText.text =
-                    MyApp.pet.age.toString() + " " + rootView.context.getString(R.string.seconds)
-            }
-            in 60..3599 -> {
-                ageText.text =
-                    (MyApp.pet.age / 60L).toString() + " " + rootView.context.getString(R.string.minutes) +
-                            " " + (MyApp.pet.age % 60L).toString() + " " + rootView.context.getString(R.string.seconds)
-            }
-            in 3600..86399 -> {
-                ageText.text =
-                    (MyApp.pet.age / 3600L).toString() + " " + rootView.context.getString(R.string.hours) +
-                            " " + ((MyApp.pet.age % 3600L) / 60).toString() + " " + rootView.context.getString(
-                        R.string.minutes
-                    ) +
-                            " " + ((MyApp.pet.age % 3600L) % 60).toString() + " " + rootView.context.getString(
-                        R.string.seconds
-                    )
-            }
-            in 86400..604799 -> {
-                ageText.text =
-                    (MyApp.pet.age / 86400L).toString() + " " + rootView.context.getString(R.string.days) +
-                            " " + ((MyApp.pet.age % 86400L) / 3600L).toString() + " " +
-                            rootView.context.getString(R.string.hours) + " " +
-                            (((MyApp.pet.age % 86400L) % 3600L) / 60).toString() + " " +
-                            rootView.context.getString(R.string.minutes)
-
-            }
-            else -> {
-                ageText.text =
-                    (MyApp.pet.age / 604800L).toString() + " " + rootView.context.getString(R.string.weeks) +
-                            " " + ((MyApp.pet.age % 604800L) / 86400L).toString() + " " +
-                            rootView.context.getString(R.string.days) + " " +
-                            (((MyApp.pet.age % 604800L) % 86400L) / 3600).toString() + " " +
-                            rootView.context.getString(R.string.hours)
-            }
-        }
+        ageText.text = FormatsHelper().formatAge(MyApp.pet.age, rootView.context)
     }
 
     private fun checkIfDead(): Boolean {
@@ -791,102 +754,6 @@ class BaseFragmentLogic(val rootView: View) {
         hungerProgress.progress = MyApp.pet.hungerLvl
         funProgress.max = MyApp.pet.maxFunLvl
         funProgress.progress = MyApp.pet.funLvl
-    }
-
-    private fun formatMoney(moneyToFormat: Long): String {
-        var moneyForm = ""
-        when (moneyToFormat) {
-            in 0..999 -> moneyForm = moneyToFormat.toString()
-            in 1000..999999 -> {
-                val money1 = moneyToFormat / 1000
-                var money2 = ""
-                if (moneyToFormat % 1000 == 0L) {
-                    money2 = "000"
-                } else if (moneyToFormat % 1000 < 100) {
-                    if (moneyToFormat % 1000 < 10) {
-                        money2 = "00" + (moneyToFormat % 100).toString()
-                    } else {
-                        money2 = "0" + (moneyToFormat % 100).toString()
-                    }
-                } else {
-                    money2 = (moneyToFormat % 1000).toString()
-                }
-                moneyForm = money1.toString() + "," + money2 + " k"
-            }
-            in 1000000..999999999 -> {
-                val money1 = moneyToFormat / 1000000
-                var money = moneyToFormat % 1000000
-                money /= 1000
-                var money2 = ""
-                if (money % 1000 == 0L) {
-                    money2 = "000"
-                } else if (money % 1000 < 100) {
-                    if (money % 1000 < 10) {
-                        money2 = "00" + (money % 100).toString()
-                    } else {
-                        money2 = "0" + (money % 100).toString()
-                    }
-                } else {
-                    money2 = (money % 1000).toString()
-                }
-                moneyForm = money1.toString() + "," + money2.toString() + " kk"
-            }
-            in 1000000000..999999999999 -> {
-                val money1 = moneyToFormat / 1000000000
-                var money = moneyToFormat % 1000000000
-                money /= 1000000
-                var money2 = ""
-                if (money % 1000 == 0L) {
-                    money2 = "000"
-                } else if (money % 1000 < 100) {
-                    if (money % 1000 < 10) {
-                        money2 = "00" + (money % 100).toString()
-                    } else {
-                        money2 = "0" + (money % 100).toString()
-                    }
-                } else {
-                    money2 = (money % 1000).toString()
-                }
-                moneyForm = money1.toString() + "," + money2 + " kkk"
-            }
-            in 1000000000000..999999999999999 -> {
-                val money1 = moneyToFormat / 1000000000000
-                var money = moneyToFormat % 1000000000000
-                money /= 1000000000
-                var money2 = ""
-                if (money % 1000 == 0L) {
-                    money2 = "000"
-                } else if (money % 1000 < 100) {
-                    if (money % 1000 < 10) {
-                        money2 = "00" + (money % 100).toString()
-                    } else {
-                        money2 = "0" + (money % 100).toString()
-                    }
-                } else {
-                    money2 = (money % 1000).toString()
-                }
-                moneyForm = money1.toString() + "," + money2 + " kkkk"
-            }
-            in 1000000000000000..999999999999999999 -> {
-                val money1 = moneyToFormat / 1000000000000000
-                var money = moneyToFormat % 1000000000000000
-                money /= 1000000000000
-                var money2 = ""
-                if (money % 1000 == 0L) {
-                    money2 = "000"
-                } else if (money % 1000 < 100) {
-                    if (money % 1000 < 10) {
-                        money2 = "00" + (money % 100).toString()
-                    } else {
-                        money2 = "0" + (money % 100).toString()
-                    }
-                } else {
-                    money2 = (money % 1000).toString()
-                }
-                moneyForm = money1.toString() + "," + money2 + " kkkkk"
-            }
-        }
-        return moneyForm
     }
 
 }

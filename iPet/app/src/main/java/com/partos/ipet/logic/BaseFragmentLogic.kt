@@ -1,7 +1,7 @@
 package com.partos.ipet.logic
 
 import android.app.Activity
-import android.media.SoundPool
+import android.icu.util.Calendar
 import android.os.Handler
 import android.view.View
 import android.widget.*
@@ -20,7 +20,6 @@ class BaseFragmentLogic(val rootView: View) {
 
 
     private lateinit var image: ImageView
-    private lateinit var soundPool: SoundPool
     private lateinit var date: Date
     private lateinit var db: DataBaseHelper
     private lateinit var foodButton: ImageView
@@ -78,15 +77,39 @@ class BaseFragmentLogic(val rootView: View) {
     }
 
     private fun checkDateDiff() {
-        val now = DateHelper().getNowDate()
+        val nowCalendar = Calendar.getInstance()
+        val now = Date(
+            0,
+            nowCalendar.get(Calendar.YEAR),
+            nowCalendar.get(Calendar.MONTH),
+            nowCalendar.get(Calendar.DAY_OF_MONTH),
+            nowCalendar.get(Calendar.HOUR_OF_DAY),
+            nowCalendar.get(Calendar.MINUTE),
+            nowCalendar.get(Calendar.SECOND)
+        )
         val then = db.getDate()[0]
-        PetHelper().setTimeDiff(DateHelper().getDiffInSeconds(then, now))
+        val diff = DateHelper().getDiffInSeconds(then, now)
+        PetHelper().setTimeDiff(diff)
         showProgress()
         db.updatePet(MyApp.pet)
+//        val now = DateHelper().getNowDate()
+//        val then = db.getDate()[0]
+//        PetHelper().setTimeDiff(DateHelper().getDiffInSeconds(then, now))
+//        showProgress()
+//        db.updatePet(MyApp.pet)
     }
 
     private fun getDate() {
-        date = DateHelper().getNowDate()
+        val today = Calendar.getInstance()
+        date = Date(
+            0,
+            today.get(Calendar.YEAR),
+            today.get(Calendar.MONTH),
+            today.get(Calendar.DAY_OF_MONTH),
+            today.get(Calendar.HOUR_OF_DAY),
+            today.get(Calendar.MINUTE),
+            today.get(Calendar.SECOND)
+        )
         val someDate = db.getDate()
         if (someDate.size == 0) {
             db.addDate(date)
@@ -94,6 +117,15 @@ class BaseFragmentLogic(val rootView: View) {
         } else {
             date = someDate[0]
         }
+
+//        date = DateHelper().getNowDate()
+//        val someDate = db.getDate()
+//        if (someDate.size == 0) {
+//            db.addDate(date)
+//            date = db.getDate()[0]
+//        } else {
+//            date = someDate[0]
+//        }
     }
 
     private fun getPet() {
@@ -583,8 +615,17 @@ class BaseFragmentLogic(val rootView: View) {
     }
 
     private fun updateDate() {
-        date = DateHelper().getNowDate()
+        var currentDate = Calendar.getInstance()
+        date.year = currentDate.get(Calendar.YEAR)
+        date.month = currentDate.get(Calendar.MONTH)
+        date.day = currentDate.get(Calendar.DAY_OF_MONTH)
+        date.hour = currentDate.get(Calendar.HOUR_OF_DAY)
+        date.minute = currentDate.get(Calendar.MINUTE)
+        date.second = currentDate.get(Calendar.SECOND)
         db.updateDate(date)
+
+//        date = DateHelper().getNowDate()
+//        db.updateDate(date)
     }
 
     private fun initIcons(activity: Activity) {

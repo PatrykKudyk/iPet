@@ -59,7 +59,7 @@ class MyAppInitHelper() {
                     1,
                     1
                 ),
-                99999999,
+                1000,
                 0,
                 1,
                 5,

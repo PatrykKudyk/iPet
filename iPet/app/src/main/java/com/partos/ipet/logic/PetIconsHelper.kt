@@ -37,6 +37,35 @@ class PetIconsHelper() {
         }
     }
 
+    fun setFunIcon(view: ImageView, context: Context, activity: Activity, petType: String) {
+        when (petType) {
+            "dog" -> activity.runOnUiThread {
+                view.setImageDrawable(context.getDrawable(R.drawable.ball))
+            }
+            "cat" -> activity.runOnUiThread {
+                view.setImageDrawable(context.getDrawable(R.drawable.wool))
+            }
+            "fish" -> activity.runOnUiThread {
+                view.setImageDrawable(context.getDrawable(R.drawable.heart))
+            }
+            "frog" -> activity.runOnUiThread {
+                view.setImageDrawable(context.getDrawable(R.drawable.heart))
+            }
+            "mouse" -> activity.runOnUiThread {
+                view.setImageDrawable(context.getDrawable(R.drawable.mouse_wheel))
+            }
+            "rabbit" -> activity.runOnUiThread {
+                view.setImageDrawable(context.getDrawable(R.drawable.heart))
+            }
+            "panda" -> activity.runOnUiThread {
+                view.setImageDrawable(context.getDrawable(R.drawable.heart))
+            }
+            "penguin" -> activity.runOnUiThread {
+                view.setImageDrawable(context.getDrawable(R.drawable.snowball))
+            }
+        }
+    }
+
     fun setNormalIcon(view: ImageView, context: Context, activity: Activity, petType: String) {
         when (petType) {
             "dog" -> activity.runOnUiThread {

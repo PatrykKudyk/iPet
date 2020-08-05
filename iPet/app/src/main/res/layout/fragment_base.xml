@@ -91,7 +91,7 @@
             android:layout_height="70dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="12dp"
-            android:src="@drawable/ball"
+            tools:src="@drawable/ball"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_money" />
 
@@ -410,10 +410,11 @@
                                 android:layout_weight="0.5" />
 
                             <ImageView
+                                android:id="@+id/upgrade_food_image"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_weight="4"
-                                android:src="@drawable/dog_food" />
+                                tools:src="@drawable/dog_food" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -490,10 +491,11 @@
                                 android:layout_weight="0.5" />
 
                             <ImageView
+                                android:id="@+id/upgrade_food_max_image"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_weight="4"
-                                android:src="@drawable/dog_food" />
+                                tools:src="@drawable/dog_food" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -570,10 +572,11 @@
                                 android:layout_weight="0.5" />
 
                             <ImageView
+                                android:id="@+id/upgrade_play_image"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_weight="4"
-                                android:src="@drawable/ball" />
+                                tools:src="@drawable/ball" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -650,10 +653,11 @@
                                 android:layout_weight="0.5" />
 
                             <ImageView
+                                android:id="@+id/upgrade_play_max_image"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_weight="4"
-                                android:src="@drawable/ball" />
+                                tools:src="@drawable/ball" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -739,10 +743,11 @@
                                 android:layout_weight="0.5" />
 
                             <ImageView
+                                android:id="@+id/upgrade_food_income_image"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_weight="4"
-                                android:src="@drawable/dog_food" />
+                                tools:src="@drawable/dog_food" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -839,10 +844,11 @@
                                 android:layout_weight="0.5" />
 
                             <ImageView
+                                android:id="@+id/upgrade_play_income_image"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_weight="4"
-                                android:src="@drawable/ball" />
+                                tools:src="@drawable/ball" />
 
                             <TextView
                                 android:layout_width="match_parent"

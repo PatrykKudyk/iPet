@@ -44,6 +44,12 @@ class BaseFragmentLogic(val rootView: View) {
     private lateinit var upgradeFoodIncomeCost: TextView
     private lateinit var upgradePlayIncome: CardView
     private lateinit var upgradePlayIncomeCost: TextView
+    private lateinit var upgradeFoodImage: ImageView
+    private lateinit var upgradeFoodMaxImage: ImageView
+    private lateinit var upgradeFoodIncomeImage: ImageView
+    private lateinit var upgradePlayImage: ImageView
+    private lateinit var upgradePlayMaxImage: ImageView
+    private lateinit var upgradePlayIncomeImage: ImageView
     private lateinit var shopCard: CardView
     private lateinit var shopCard1: CardView
     private lateinit var shopCard2: CardView
@@ -166,7 +172,7 @@ class BaseFragmentLogic(val rootView: View) {
                     1,
                     1
                 ),
-                100000,
+                99999999,
                 0,
                 1,
                 5,
@@ -190,6 +196,7 @@ class BaseFragmentLogic(val rootView: View) {
         foodButton.setOnClickListener {
             if (MyApp.pet.isAlive == 1) {
                 PetHelper().handleFoodButton()
+                AnimationsHelper().animateFood(rootView.context)
                 db.updatePet(MyApp.pet)
                 showProgress()
                 moneyText.text = FormatsHelper().formatMoney(MyApp.pet.points)
@@ -224,6 +231,42 @@ class BaseFragmentLogic(val rootView: View) {
                     FormatsHelper().formatMoney(MyApp.pet.upgradePrices.hungerIncome)
                 upgradePlayIncomeCost.text =
                     FormatsHelper().formatMoney(MyApp.pet.upgradePrices.funIncome)
+                PetIconsHelper().setFoodIcon(
+                    upgradeFoodImage,
+                    rootView.context,
+                    rootView.context as MainActivity,
+                    MyApp.pet.look.petType
+                )
+                PetIconsHelper().setFoodIcon(
+                    upgradeFoodMaxImage,
+                    rootView.context,
+                    rootView.context as MainActivity,
+                    MyApp.pet.look.petType
+                )
+                PetIconsHelper().setFoodIcon(
+                    upgradeFoodIncomeImage,
+                    rootView.context,
+                    rootView.context as MainActivity,
+                    MyApp.pet.look.petType
+                )
+                PetIconsHelper().setFunIcon(
+                    upgradePlayImage,
+                    rootView.context,
+                    rootView.context as MainActivity,
+                    MyApp.pet.look.petType
+                )
+                PetIconsHelper().setFunIcon(
+                    upgradePlayMaxImage,
+                    rootView.context,
+                    rootView.context as MainActivity,
+                    MyApp.pet.look.petType
+                )
+                PetIconsHelper().setFunIcon(
+                    upgradePlayIncomeImage,
+                    rootView.context,
+                    rootView.context as MainActivity,
+                    MyApp.pet.look.petType
+                )
             } else {
                 upgradesCard.visibility = View.GONE
             }
@@ -581,6 +624,12 @@ class BaseFragmentLogic(val rootView: View) {
         ball8 = rootView.findViewById(R.id.ball_image_8)
         ball9 = rootView.findViewById(R.id.ball_image_9)
         ball10 = rootView.findViewById(R.id.ball_image_10)
+        upgradeFoodImage = rootView.findViewById(R.id.upgrade_food_image)
+        upgradeFoodMaxImage = rootView.findViewById(R.id.upgrade_food_max_image)
+        upgradeFoodIncomeImage = rootView.findViewById(R.id.upgrade_food_income_image)
+        upgradePlayImage = rootView.findViewById(R.id.upgrade_play_image)
+        upgradePlayMaxImage = rootView.findViewById(R.id.upgrade_play_max_image)
+        upgradePlayIncomeImage = rootView.findViewById(R.id.upgrade_play_income_image)
     }
 
     private fun mainLoop() {
@@ -664,6 +713,7 @@ class BaseFragmentLogic(val rootView: View) {
 
     private fun initIcons(activity: Activity) {
         PetIconsHelper().setFoodIcon(foodButton, rootView.context, activity, MyApp.pet.look.petType)
+        PetIconsHelper().setFunIcon(playButton, rootView.context, activity, MyApp.pet.look.petType)
     }
 
     private fun showAge() {

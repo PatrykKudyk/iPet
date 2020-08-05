@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Handler
 import android.view.View
 import android.view.animation.AnimationUtils
+import androidx.cardview.widget.CardView
 import com.partos.ipet.MyApp
 import com.partos.ipet.R
 import com.partos.ipet.activities.MainActivity
@@ -50,5 +51,25 @@ class AnimationsHelper() {
             MyApp.balls[number].imageView.visibility = View.INVISIBLE
             MyApp.balls[number].isUsed = false
         }, 570)
+    }
+
+    fun animateEnterLeft(cardView: CardView, context: Context) {
+        val animation = AnimationUtils.loadAnimation(context, R.anim.enter_left)
+        cardView.startAnimation(animation)
+    }
+
+    fun animateEnterRight(cardView: CardView, context: Context) {
+        val animation = AnimationUtils.loadAnimation(context, R.anim.enter_right)
+        cardView.startAnimation(animation)
+    }
+
+    fun animateExitLeft(cardView: CardView, context: Context) {
+        val animation = AnimationUtils.loadAnimation(context, R.anim.exit_left)
+        cardView.startAnimation(animation)
+    }
+
+    fun animateExitRight(cardView: CardView, context: Context) {
+        val animation = AnimationUtils.loadAnimation(context, R.anim.exit_right)
+        cardView.startAnimation(animation)
     }
 }

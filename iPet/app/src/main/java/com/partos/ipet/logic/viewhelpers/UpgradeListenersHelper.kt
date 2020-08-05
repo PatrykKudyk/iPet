@@ -1,5 +1,6 @@
 package com.partos.ipet.logic.viewhelpers
 
+import android.os.Handler
 import android.view.View
 import android.widget.*
 import androidx.cardview.widget.CardView
@@ -7,10 +8,7 @@ import com.partos.ipet.MyApp
 import com.partos.ipet.R
 import com.partos.ipet.activities.MainActivity
 import com.partos.ipet.db.DataBaseHelper
-import com.partos.ipet.logic.FormatsHelper
-import com.partos.ipet.logic.PetHelper
-import com.partos.ipet.logic.PetIconsHelper
-import com.partos.ipet.logic.ToastHelper
+import com.partos.ipet.logic.*
 
 class UpgradeListenersHelper () {
 
@@ -49,10 +47,14 @@ class UpgradeListenersHelper () {
 
         upgradeButton.setOnClickListener {
             if (shopCard.visibility == View.VISIBLE) {
-                shopCard.visibility = View.GONE
+                AnimationsHelper().animateExitRight(shopCard, rootView.context)
+                Handler().postDelayed({
+                    shopCard.visibility = View.GONE
+                },400)
             }
             if (upgradesCard.visibility == View.GONE) {
                 upgradesCard.visibility = View.VISIBLE
+                AnimationsHelper().animateEnterLeft(upgradesCard, rootView.context)
                 upgradeFoodCost.text =
                     FormatsHelper().formatMoney(MyApp.pet.upgradePrices.hungerAmount)
                 upgradeFoodMaxCost.text =
@@ -102,7 +104,10 @@ class UpgradeListenersHelper () {
                     MyApp.pet.look.petType
                 )
             } else {
-                upgradesCard.visibility = View.GONE
+                AnimationsHelper().animateExitLeft(upgradesCard, rootView.context)
+                Handler().postDelayed({
+                    upgradesCard.visibility = View.GONE
+                },400)
             }
         }
 

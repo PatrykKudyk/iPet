@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.partos.ipet.MyApp
 import com.partos.ipet.R
 import com.partos.ipet.db.DataBaseHelper
+import com.partos.ipet.logic.AnimationsHelper
 import com.partos.ipet.logic.MainLoop
 import com.partos.ipet.logic.ToastHelper
 
@@ -36,14 +37,21 @@ class ShopListenersHelper () {
 
         lookButton.setOnClickListener {
             if (upgradesCard.visibility == View.VISIBLE) {
-                upgradesCard.visibility = View.GONE
+                AnimationsHelper().animateExitLeft(upgradesCard, rootView.context)
+                Handler().postDelayed({
+                    upgradesCard.visibility = View.GONE
+                },400)
             }
             if (shopCard.visibility == View.GONE) {
+                AnimationsHelper().animateEnterRight(shopCard, rootView.context)
                 shopCard.visibility = View.VISIBLE
                 shopChoice.visibility = View.VISIBLE
             } else {
-                shopCard.visibility = View.GONE
                 shopChoice.visibility = View.VISIBLE
+                AnimationsHelper().animateExitRight(shopCard, rootView.context)
+                Handler().postDelayed({
+                    shopCard.visibility = View.GONE
+                },400)
             }
         }
 

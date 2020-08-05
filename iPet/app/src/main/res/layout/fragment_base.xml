@@ -38,7 +38,8 @@
             android:layout_height="200dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:src="@drawable/dog_normal" />
 
         <ImageView
             android:id="@+id/button_food"
@@ -46,7 +47,7 @@
             android:layout_height="70dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="24dp"
-            android:src="@drawable/dog_food"
+            tools:src="@drawable/dog_food"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_money" />
 
@@ -90,7 +91,7 @@
             android:layout_height="70dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="12dp"
-            android:src="@drawable/ball"
+            tools:src="@drawable/ball"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_money" />
 
@@ -201,6 +202,155 @@
             app:layout_constraintStart_toEndOf="parent"
             tools:text="5 sec" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="30dp"
+            android:orientation="horizontal"
+            android:weightSum="100"
+            android:layout_marginTop="70dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/upgrades_card">
+
+            <ImageView
+                android:id="@+id/ball_image_1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:visibility="invisible"
+                tools:src="@drawable/ball" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5" />
+
+            <ImageView
+                android:id="@+id/ball_image_2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:visibility="invisible"
+                tools:src="@drawable/ball" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5" />
+
+            <ImageView
+                android:id="@+id/ball_image_3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:visibility="invisible"
+                tools:src="@drawable/ball" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5" />
+
+            <ImageView
+                android:id="@+id/ball_image_4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:visibility="invisible"
+                tools:src="@drawable/ball" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5" />
+
+            <ImageView
+                android:id="@+id/ball_image_5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:visibility="invisible"
+                tools:src="@drawable/ball" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginStart="60dp"
+            android:orientation="horizontal"
+            android:weightSum="100"
+            android:layout_marginTop="70dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/upgrades_card">
+
+
+            <ImageView
+                android:id="@+id/ball_image_6"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:visibility="invisible"
+                tools:src="@drawable/ball" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5" />
+
+            <ImageView
+                android:id="@+id/ball_image_7"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:visibility="invisible"
+                tools:src="@drawable/ball" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5" />
+
+            <ImageView
+                android:id="@+id/ball_image_8"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:visibility="invisible"
+                tools:src="@drawable/ball" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5" />
+
+            <ImageView
+                android:id="@+id/ball_image_9"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:visibility="invisible"
+                tools:src="@drawable/ball" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5" />
+
+            <ImageView
+                android:id="@+id/ball_image_10"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:visibility="invisible"
+                tools:src="@drawable/ball" />
+
+
+        </LinearLayout>
+
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/upgrades_card"
             android:layout_width="match_parent"
@@ -216,552 +366,557 @@
             app:layout_constraintTop_toBottomOf="@id/button_upgrades"
             app:strokeColor="@color/colorPrimary"
             app:strokeWidth="4dp"
-            tools:visibility="visible">
-
-         <LinearLayout
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:orientation="vertical">
-
-             <LinearLayout
-                 android:layout_width="match_parent"
-                 android:layout_height="100dp"
-                 android:orientation="horizontal"
-                 android:weightSum="100">
-
-                 <View
-                     android:layout_width="0dp"
-                     android:layout_height="match_parent"
-                     android:layout_weight="2" />
-
-                 <com.google.android.material.card.MaterialCardView
-                     android:id="@+id/upgrade_food"
-                     android:layout_width="0dp"
-                     android:layout_height="84dp"
-                     android:layout_marginTop="8dp"
-                     android:layout_weight="22"
-                     android:theme="@style/Theme.MaterialComponents.Light"
-                     app:cardBackgroundColor="@color/coloWhite"
-                     app:cardCornerRadius="18dp"
-                     app:layout_constraintStart_toStartOf="parent"
-                     app:layout_constraintTop_toBottomOf="@id/button_upgrades"
-                     app:strokeColor="@color/colorPrimary"
-                     app:strokeWidth="1dp">
-
-                     <LinearLayout
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:orientation="vertical"
-                         android:weightSum="10">
-
-                         <View
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_weight="0.5" />
-
-                         <ImageView
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_weight="4"
-                             android:src="@drawable/dog_food" />
-
-                         <TextView
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_weight="2"
-                             android:fontFamily="@font/dustismo_bold"
-                             android:gravity="center"
-                             android:text="@string/amount"
-                             android:textSize="12dip" />
-
-                         <LinearLayout
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_gravity="center"
-                             android:layout_weight="3"
-                             android:orientation="horizontal"
-                             android:weightSum="10">
-
-                             <TextView
-                                 android:id="@+id/upgrade_food_cost"
-                                 android:layout_width="0dp"
-                                 android:layout_height="match_parent"
-                                 android:layout_weight="7.2"
-                                 android:fontFamily="@font/dustismo_bold"
-                                 android:gravity="right|center_vertical"
-                                 android:textSize="13dip"
-                                 tools:text="999,999 k" />
-
-                             <View
-                                 android:layout_width="0dp"
-                                 android:layout_height="match_parent"
-                                 android:layout_weight="0.5" />
-
-                             <ImageView
-                                 android:layout_width="0dp"
-                                 android:layout_height="match_parent"
-                                 android:layout_weight="1.2"
-                                 android:src="@drawable/coin" />
-
-                         </LinearLayout>
-
-                     </LinearLayout>
-
-                 </com.google.android.material.card.MaterialCardView>
-
-                 <View
-                     android:layout_width="0dp"
-                     android:layout_height="match_parent"
-                     android:layout_weight="3" />
-
-                 <com.google.android.material.card.MaterialCardView
-                     android:id="@+id/upgrade_food_max"
-                     android:layout_width="0dp"
-                     android:layout_height="84dp"
-                     android:layout_marginTop="8dp"
-                     android:layout_weight="22"
-                     android:theme="@style/Theme.MaterialComponents.Light"
-                     app:cardBackgroundColor="@color/coloWhite"
-                     app:cardCornerRadius="18dp"
-                     app:layout_constraintStart_toStartOf="parent"
-                     app:layout_constraintTop_toBottomOf="@id/button_upgrades"
-                     app:strokeColor="@color/colorPrimary"
-                     app:strokeWidth="1dp">
-
-                     <LinearLayout
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:orientation="vertical"
-                         android:weightSum="10">
-
-                         <View
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_weight="0.5" />
-
-                         <ImageView
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_weight="4"
-                             android:src="@drawable/dog_food" />
-
-                         <TextView
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_weight="2"
-                             android:fontFamily="@font/dustismo_bold"
-                             android:gravity="center"
-                             android:text="@string/max"
-                             android:textSize="12dip" />
-
-                         <LinearLayout
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_gravity="center"
-                             android:layout_weight="3"
-                             android:orientation="horizontal"
-                             android:weightSum="10">
-
-                             <TextView
-                                 android:id="@+id/upgrade_food_max_cost"
-                                 android:layout_width="0dp"
-                                 android:layout_height="match_parent"
-                                 android:layout_weight="7.2"
-                                 android:fontFamily="@font/dustismo_bold"
-                                 android:gravity="right|center_vertical"
-                                 android:textSize="13dip"
-                                 tools:text="999,999 k" />
-
-                             <View
-                                 android:layout_width="0dp"
-                                 android:layout_height="match_parent"
-                                 android:layout_weight="0.5" />
-
-                             <ImageView
-                                 android:layout_width="0dp"
-                                 android:layout_height="match_parent"
-                                 android:layout_weight="1.2"
-                                 android:src="@drawable/coin" />
-
-                         </LinearLayout>
-
-                     </LinearLayout>
-
-                 </com.google.android.material.card.MaterialCardView>
-
-                 <View
-                     android:layout_width="0dp"
-                     android:layout_height="match_parent"
-                     android:layout_weight="2" />
-
-                 <com.google.android.material.card.MaterialCardView
-                     android:id="@+id/upgrade_play"
-                     android:layout_width="0dp"
-                     android:layout_height="84dp"
-                     android:layout_marginTop="8dp"
-                     android:layout_weight="22"
-                     android:theme="@style/Theme.MaterialComponents.Light"
-                     app:cardBackgroundColor="@color/coloWhite"
-                     app:cardCornerRadius="18dp"
-                     app:layout_constraintStart_toStartOf="parent"
-                     app:layout_constraintTop_toBottomOf="@id/button_upgrades"
-                     app:strokeColor="@color/colorPrimary"
-                     app:strokeWidth="1dp">
-
-                     <LinearLayout
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:orientation="vertical"
-                         android:weightSum="10">
-
-                         <View
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_weight="0.5" />
-
-                         <ImageView
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_weight="4"
-                             android:src="@drawable/ball" />
-
-                         <TextView
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_weight="2"
-                             android:fontFamily="@font/dustismo_bold"
-                             android:gravity="center"
-                             android:text="@string/amount"
-                             android:textSize="12dip" />
-
-                         <LinearLayout
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_gravity="center"
-                             android:layout_weight="3"
-                             android:orientation="horizontal"
-                             android:weightSum="10">
-
-                             <TextView
-                                 android:id="@+id/upgrade_play_cost"
-                                 android:layout_width="0dp"
-                                 android:layout_height="match_parent"
-                                 android:layout_weight="7.2"
-                                 android:fontFamily="@font/dustismo_bold"
-                                 android:gravity="right|center_vertical"
-                                 android:textSize="13dip"
-                                 tools:text="999,999 k" />
-
-                             <View
-                                 android:layout_width="0dp"
-                                 android:layout_height="match_parent"
-                                 android:layout_weight="0.5" />
-
-                             <ImageView
-                                 android:layout_width="0dp"
-                                 android:layout_height="match_parent"
-                                 android:layout_weight="1.2"
-                                 android:src="@drawable/coin" />
-
-                         </LinearLayout>
-
-                     </LinearLayout>
-
-                 </com.google.android.material.card.MaterialCardView>
-
-                 <View
-                     android:layout_width="0dp"
-                     android:layout_height="match_parent"
-                     android:layout_weight="3" />
-
-                 <com.google.android.material.card.MaterialCardView
-                     android:id="@+id/upgrade_play_max"
-                     android:layout_width="0dp"
-                     android:layout_height="84dp"
-                     android:layout_marginTop="8dp"
-                     android:layout_weight="22"
-                     android:theme="@style/Theme.MaterialComponents.Light"
-                     app:cardBackgroundColor="@color/coloWhite"
-                     app:cardCornerRadius="18dp"
-                     app:layout_constraintStart_toStartOf="parent"
-                     app:layout_constraintTop_toBottomOf="@id/button_upgrades"
-                     app:strokeColor="@color/colorPrimary"
-                     app:strokeWidth="1dp">
-
-                     <LinearLayout
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:orientation="vertical"
-                         android:weightSum="10">
-
-                         <View
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_weight="0.5" />
-
-                         <ImageView
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_weight="4"
-                             android:src="@drawable/ball" />
-
-                         <TextView
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_weight="2"
-                             android:fontFamily="@font/dustismo_bold"
-                             android:gravity="center"
-                             android:text="@string/max"
-                             android:textSize="12dip" />
-
-                         <LinearLayout
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_gravity="center"
-                             android:layout_weight="3"
-                             android:orientation="horizontal"
-                             android:weightSum="10">
-
-                             <TextView
-                                 android:id="@+id/upgrade_play_max_cost"
-                                 android:layout_width="0dp"
-                                 android:layout_height="match_parent"
-                                 android:layout_weight="7.2"
-                                 android:fontFamily="@font/dustismo_bold"
-                                 android:gravity="right|center_vertical"
-                                 android:textSize="13dip"
-                                 tools:text="999,999 k" />
-
-                             <View
-                                 android:layout_width="0dp"
-                                 android:layout_height="match_parent"
-                                 android:layout_weight="0.5" />
-
-                             <ImageView
-                                 android:layout_width="0dp"
-                                 android:layout_height="match_parent"
-                                 android:layout_weight="1.2"
-                                 android:src="@drawable/coin" />
-
-                         </LinearLayout>
-
-                     </LinearLayout>
-
-                 </com.google.android.material.card.MaterialCardView>
-
-
-             </LinearLayout>
-
-             <LinearLayout
-                 android:layout_width="match_parent"
-                 android:layout_height="100dp"
-                 android:orientation="horizontal"
-                 android:weightSum="100">
-
-                 <View
-                     android:layout_width="0dp"
-                     android:layout_height="match_parent"
-                     android:layout_weight="2" />
-
-                 <com.google.android.material.card.MaterialCardView
-                     android:id="@+id/upgrade_food_income"
-                     android:layout_width="0dp"
-                     android:layout_height="84dp"
-                     android:layout_marginTop="8dp"
-                     android:layout_weight="22"
-                     android:theme="@style/Theme.MaterialComponents.Light"
-                     app:cardBackgroundColor="@color/coloWhite"
-                     app:cardCornerRadius="18dp"
-                     app:layout_constraintStart_toStartOf="parent"
-                     app:layout_constraintTop_toBottomOf="@id/button_upgrades"
-                     app:strokeColor="@color/colorPrimary"
-                     app:strokeWidth="1dp">
-
-                     <LinearLayout
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:orientation="vertical"
-                         android:weightSum="10">
-
-                         <View
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_weight="0.5" />
-
-                         <ImageView
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_weight="4"
-                             android:src="@drawable/dog_food" />
-
-                         <TextView
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_weight="2"
-                             android:fontFamily="@font/dustismo_bold"
-                             android:gravity="center"
-                             android:text="@string/income"
-                             android:textSize="12dip" />
-
-                         <LinearLayout
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_gravity="center"
-                             android:layout_weight="3"
-                             android:orientation="horizontal"
-                             android:weightSum="10">
-
-                             <TextView
-                                 android:id="@+id/upgrade_food_income_cost"
-                                 android:layout_width="0dp"
-                                 android:layout_height="match_parent"
-                                 android:layout_weight="7.2"
-                                 android:fontFamily="@font/dustismo_bold"
-                                 android:gravity="right|center_vertical"
-                                 android:textSize="13dip"
-                                 tools:text="999,999 k" />
-
-                             <View
-                                 android:layout_width="0dp"
-                                 android:layout_height="match_parent"
-                                 android:layout_weight="0.5" />
-
-                             <ImageView
-                                 android:layout_width="0dp"
-                                 android:layout_height="match_parent"
-                                 android:layout_weight="1.2"
-                                 android:src="@drawable/coin" />
-
-                         </LinearLayout>
-
-                     </LinearLayout>
-
-                 </com.google.android.material.card.MaterialCardView>
-
-                 <View
-                     android:layout_width="0dp"
-                     android:layout_height="match_parent"
-                     android:layout_weight="3" />
-
-                 <com.google.android.material.card.MaterialCardView
-                     android:layout_width="0dp"
-                     android:layout_height="84dp"
-                     android:layout_marginTop="8dp"
-                     android:layout_weight="22"
-                     android:theme="@style/Theme.MaterialComponents.Light"
-                     app:cardBackgroundColor="@color/coloWhite"
-                     app:cardCornerRadius="18dp"
-                     android:visibility="invisible"
-                     app:layout_constraintStart_toStartOf="parent"
-                     app:layout_constraintTop_toBottomOf="@id/button_upgrades">
-
-
-                 </com.google.android.material.card.MaterialCardView>
-
-                 <View
-                     android:layout_width="0dp"
-                     android:layout_height="match_parent"
-                     android:layout_weight="2" />
-
-                 <com.google.android.material.card.MaterialCardView
-                     android:id="@+id/upgrade_play_income"
-                     android:layout_width="0dp"
-                     android:layout_height="84dp"
-                     android:layout_marginTop="8dp"
-                     android:layout_weight="22"
-                     android:theme="@style/Theme.MaterialComponents.Light"
-                     app:cardBackgroundColor="@color/coloWhite"
-                     app:cardCornerRadius="18dp"
-                     app:layout_constraintStart_toStartOf="parent"
-                     app:layout_constraintTop_toBottomOf="@id/button_upgrades"
-                     app:strokeColor="@color/colorPrimary"
-                     app:strokeWidth="1dp">
-
-                     <LinearLayout
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:orientation="vertical"
-                         android:weightSum="10">
-
-                         <View
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_weight="0.5" />
-
-                         <ImageView
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_weight="4"
-                             android:src="@drawable/ball" />
-
-                         <TextView
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_weight="2"
-                             android:fontFamily="@font/dustismo_bold"
-                             android:gravity="center"
-                             android:text="@string/income"
-                             android:textSize="12dip" />
-
-                         <LinearLayout
-                             android:layout_width="match_parent"
-                             android:layout_height="0dp"
-                             android:layout_gravity="center"
-                             android:layout_weight="3"
-                             android:orientation="horizontal"
-                             android:weightSum="10">
-
-                             <TextView
-                                 android:id="@+id/upgrade_play_income_cost"
-                                 android:layout_width="0dp"
-                                 android:layout_height="match_parent"
-                                 android:layout_weight="7.2"
-                                 android:fontFamily="@font/dustismo_bold"
-                                 android:gravity="right|center_vertical"
-                                 android:textSize="13dip"
-                                 tools:text="999,999 k" />
-
-                             <View
-                                 android:layout_width="0dp"
-                                 android:layout_height="match_parent"
-                                 android:layout_weight="0.5" />
-
-                             <ImageView
-                                 android:layout_width="0dp"
-                                 android:layout_height="match_parent"
-                                 android:layout_weight="1.2"
-                                 android:src="@drawable/coin" />
-
-                         </LinearLayout>
-
-                     </LinearLayout>
-
-                 </com.google.android.material.card.MaterialCardView>
-
-                 <View
-                     android:layout_width="0dp"
-                     android:layout_height="match_parent"
-                     android:layout_weight="3" />
-
-                 <com.google.android.material.card.MaterialCardView
-                     android:layout_width="0dp"
-                     android:layout_height="84dp"
-                     android:layout_marginTop="8dp"
-                     android:layout_weight="22"
-                     android:theme="@style/Theme.MaterialComponents.Light"
-                     app:cardBackgroundColor="@color/coloWhite"
-                     app:cardCornerRadius="18dp"
-                     app:layout_constraintStart_toStartOf="parent"
-                     app:layout_constraintTop_toBottomOf="@id/button_upgrades"
-                   >
-
-                 </com.google.android.material.card.MaterialCardView>
-
-
-             </LinearLayout>
-
-
-         </LinearLayout>
+            tools:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/upgrade_food"
+                        android:layout_width="0dp"
+                        android:layout_height="84dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="22"
+                        android:theme="@style/Theme.MaterialComponents.Light"
+                        app:cardBackgroundColor="@color/coloWhite"
+                        app:cardCornerRadius="18dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/button_upgrades"
+                        app:strokeColor="@color/colorPrimary"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:weightSum="10">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="0.5" />
+
+                            <ImageView
+                                android:id="@+id/upgrade_food_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="4"
+                                tools:src="@drawable/dog_food" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="2"
+                                android:fontFamily="@font/dustismo_bold"
+                                android:gravity="center"
+                                android:text="@string/amount"
+                                android:textSize="12dip" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="3"
+                                android:orientation="horizontal"
+                                android:weightSum="10">
+
+                                <TextView
+                                    android:id="@+id/upgrade_food_cost"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="7.2"
+                                    android:fontFamily="@font/dustismo_bold"
+                                    android:gravity="right|center_vertical"
+                                    android:textSize="13dip"
+                                    tools:text="999,999 k" />
+
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.5" />
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1.2"
+                                    android:src="@drawable/coin" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/upgrade_food_max"
+                        android:layout_width="0dp"
+                        android:layout_height="84dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="22"
+                        android:theme="@style/Theme.MaterialComponents.Light"
+                        app:cardBackgroundColor="@color/coloWhite"
+                        app:cardCornerRadius="18dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/button_upgrades"
+                        app:strokeColor="@color/colorPrimary"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:weightSum="10">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="0.5" />
+
+                            <ImageView
+                                android:id="@+id/upgrade_food_max_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="4"
+                                tools:src="@drawable/dog_food" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="2"
+                                android:fontFamily="@font/dustismo_bold"
+                                android:gravity="center"
+                                android:text="@string/max"
+                                android:textSize="12dip" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="3"
+                                android:orientation="horizontal"
+                                android:weightSum="10">
+
+                                <TextView
+                                    android:id="@+id/upgrade_food_max_cost"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="7.2"
+                                    android:fontFamily="@font/dustismo_bold"
+                                    android:gravity="right|center_vertical"
+                                    android:textSize="13dip"
+                                    tools:text="999,999 k" />
+
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.5" />
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1.2"
+                                    android:src="@drawable/coin" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/upgrade_play"
+                        android:layout_width="0dp"
+                        android:layout_height="84dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="22"
+                        android:theme="@style/Theme.MaterialComponents.Light"
+                        app:cardBackgroundColor="@color/coloWhite"
+                        app:cardCornerRadius="18dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/button_upgrades"
+                        app:strokeColor="@color/colorPrimary"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:weightSum="10">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="0.5" />
+
+                            <ImageView
+                                android:id="@+id/upgrade_play_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="4"
+                                tools:src="@drawable/ball" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="2"
+                                android:fontFamily="@font/dustismo_bold"
+                                android:gravity="center"
+                                android:text="@string/amount"
+                                android:textSize="12dip" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="3"
+                                android:orientation="horizontal"
+                                android:weightSum="10">
+
+                                <TextView
+                                    android:id="@+id/upgrade_play_cost"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="7.2"
+                                    android:fontFamily="@font/dustismo_bold"
+                                    android:gravity="right|center_vertical"
+                                    android:textSize="13dip"
+                                    tools:text="999,999 k" />
+
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.5" />
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1.2"
+                                    android:src="@drawable/coin" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/upgrade_play_max"
+                        android:layout_width="0dp"
+                        android:layout_height="84dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="22"
+                        android:theme="@style/Theme.MaterialComponents.Light"
+                        app:cardBackgroundColor="@color/coloWhite"
+                        app:cardCornerRadius="18dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/button_upgrades"
+                        app:strokeColor="@color/colorPrimary"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:weightSum="10">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="0.5" />
+
+                            <ImageView
+                                android:id="@+id/upgrade_play_max_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="4"
+                                tools:src="@drawable/ball" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="2"
+                                android:fontFamily="@font/dustismo_bold"
+                                android:gravity="center"
+                                android:text="@string/max"
+                                android:textSize="12dip" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="3"
+                                android:orientation="horizontal"
+                                android:weightSum="10">
+
+                                <TextView
+                                    android:id="@+id/upgrade_play_max_cost"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="7.2"
+                                    android:fontFamily="@font/dustismo_bold"
+                                    android:gravity="right|center_vertical"
+                                    android:textSize="13dip"
+                                    tools:text="999,999 k" />
+
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.5" />
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1.2"
+                                    android:src="@drawable/coin" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/upgrade_food_income"
+                        android:layout_width="0dp"
+                        android:layout_height="84dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="22"
+                        android:theme="@style/Theme.MaterialComponents.Light"
+                        app:cardBackgroundColor="@color/coloWhite"
+                        app:cardCornerRadius="18dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/button_upgrades"
+                        app:strokeColor="@color/colorPrimary"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:weightSum="10">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="0.5" />
+
+                            <ImageView
+                                android:id="@+id/upgrade_food_income_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="4"
+                                tools:src="@drawable/dog_food" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="2"
+                                android:fontFamily="@font/dustismo_bold"
+                                android:gravity="center"
+                                android:text="@string/income"
+                                android:textSize="12dip" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="3"
+                                android:orientation="horizontal"
+                                android:weightSum="10">
+
+                                <TextView
+                                    android:id="@+id/upgrade_food_income_cost"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="7.2"
+                                    android:fontFamily="@font/dustismo_bold"
+                                    android:gravity="right|center_vertical"
+                                    android:textSize="13dip"
+                                    tools:text="999,999 k" />
+
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.5" />
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1.2"
+                                    android:src="@drawable/coin" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="84dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="22"
+                        android:theme="@style/Theme.MaterialComponents.Light"
+                        android:visibility="invisible"
+                        app:cardBackgroundColor="@color/coloWhite"
+                        app:cardCornerRadius="18dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/button_upgrades">
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/upgrade_play_income"
+                        android:layout_width="0dp"
+                        android:layout_height="84dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="22"
+                        android:theme="@style/Theme.MaterialComponents.Light"
+                        app:cardBackgroundColor="@color/coloWhite"
+                        app:cardCornerRadius="18dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/button_upgrades"
+                        app:strokeColor="@color/colorPrimary"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:weightSum="10">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="0.5" />
+
+                            <ImageView
+                                android:id="@+id/upgrade_play_income_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="4"
+                                tools:src="@drawable/ball" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="2"
+                                android:fontFamily="@font/dustismo_bold"
+                                android:gravity="center"
+                                android:text="@string/income"
+                                android:textSize="12dip" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="3"
+                                android:orientation="horizontal"
+                                android:weightSum="10">
+
+                                <TextView
+                                    android:id="@+id/upgrade_play_income_cost"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="7.2"
+                                    android:fontFamily="@font/dustismo_bold"
+                                    android:gravity="right|center_vertical"
+                                    android:textSize="13dip"
+                                    tools:text="999,999 k" />
+
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.5" />
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1.2"
+                                    android:src="@drawable/coin" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="84dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="22"
+                        android:theme="@style/Theme.MaterialComponents.Light"
+                        app:cardBackgroundColor="@color/coloWhite"
+                        app:cardCornerRadius="18dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/button_upgrades">
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
 
 
         </com.google.android.material.card.MaterialCardView>
@@ -785,10 +940,10 @@
 
             <LinearLayout
                 android:id="@+id/shop_normal"
-                tools:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1334,10 +1489,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/shop_question"
-                android:visibility="gone"
-                tools:visibility="visible"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                tools:visibility="visible">
 
                 <TextView
                     android:id="@+id/textView"
@@ -1361,8 +1516,8 @@
                     android:layout_marginStart="72dp"
                     android:layout_marginTop="16dp"
                     android:background="@drawable/button_yes"
-                    android:text="@string/yes"
                     android:fontFamily="@font/dustismo_bold"
+                    android:text="@string/yes"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -1370,11 +1525,11 @@
                     android:id="@+id/shop_button_no"
                     android:layout_width="80dp"
                     android:layout_height="50dp"
-                    android:layout_marginEnd="72dp"
                     android:layout_marginTop="16dp"
+                    android:layout_marginEnd="72dp"
                     android:background="@drawable/button_no"
-                    android:text="@string/no"
                     android:fontFamily="@font/dustismo_bold"
+                    android:text="@string/no"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView" />
 

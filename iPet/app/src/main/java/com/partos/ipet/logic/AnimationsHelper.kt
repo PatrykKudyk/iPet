@@ -39,7 +39,12 @@ class AnimationsHelper() {
         MyApp.balls[number].isUsed = true
         val animation = AnimationUtils.loadAnimation(context, R.anim.fall_down)
         MyApp.balls[number].imageView.visibility = View.VISIBLE
-        MyApp.balls[number].imageView.setImageDrawable(context.getDrawable(R.drawable.ball))
+        PetIconsHelper().setFunIcon(
+            MyApp.balls[number].imageView,
+            context,
+            context as MainActivity,
+            MyApp.pet.look.petType
+        )
         MyApp.balls[number].imageView.startAnimation(animation)
         Handler().postDelayed({
             MyApp.balls[number].imageView.visibility = View.INVISIBLE
